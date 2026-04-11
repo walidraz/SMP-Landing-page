@@ -1,0 +1,3267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Secure Mortgages & Protection</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --ink: #0e1712;
+  --cream: #f5f0e8;
+  --gold: #b8892a;
+  --gold-light: #d4a84b;
+  --forest: #1a3028;
+  --sage: #2d4a3e;
+  --mist: #e8e2d6;
+  --white: #ffffff;
+  --muted: rgba(14,23,18,0.45);
+  --serif: 'Cormorant Garamond', serif;
+  --sans: 'DM Sans', sans-serif;
+  --accent: #C8963E;
+  --bg-dark: #003B35;
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; font-size: 16px; }
+
+body {
+  font-family: var(--sans);
+  background: var(--cream);
+  color: var(--ink);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ═══ NEWS TICKER ═══ */
+.news-ticker{background:var(--accent);overflow:hidden;white-space:nowrap;position:relative;z-index:1100;display:flex;align-items:center;height:36px;max-height:36px;}
+.news-ticker-label{background:var(--bg-dark);color:var(--accent);padding:0 16px;font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;flex-shrink:0;display:flex;align-items:center;gap:6px;height:100%;}
+.news-ticker-label::before{content:'';width:7px;height:7px;border-radius:50%;background:#e74c3c;animation:tickerPulse 1.5s ease-in-out infinite;flex-shrink:0;}
+@keyframes tickerPulse{0%,100%{opacity:1;}50%{opacity:0.3;}}
+.news-ticker-track{display:flex;animation:tickerScroll 80s linear infinite;will-change:transform;}
+.news-ticker-track:hover{animation-play-state:paused;}
+.news-ticker-item{padding:0 32px;font-size:12.5px;font-weight:500;flex-shrink:0;display:flex;align-items:center;gap:8px;color:var(--bg-dark);line-height:36px;}
+.news-ticker-item::before{content:'·';font-size:18px;opacity:0.4;line-height:1;}
+@keyframes tickerScroll{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
+
+/* ═══ MODAL ═══ */
+.modal-overlay{position:fixed;inset:0;background:rgba(14,23,18,0.75);backdrop-filter:blur(6px);z-index:9000;display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;visibility:hidden;transition:opacity 0.3s ease,visibility 0.3s ease;}
+.modal-overlay.open{opacity:1;visibility:visible;}
+.modal{background:var(--cream);width:100%;max-width:540px;max-height:90vh;overflow-y:auto;border-radius:4px;padding:52px 44px;position:relative;transform:translateY(24px);transition:transform 0.4s cubic-bezier(0.16,1,0.3,1);}
+.modal-overlay.open .modal{transform:translateY(0);}
+.modal-close{position:absolute;top:18px;right:18px;background:none;border:none;cursor:pointer;width:36px;height:36px;display:flex;align-items:center;justify-content:center;opacity:0.35;transition:opacity 0.2s;}
+.modal-close:hover{opacity:1;}
+.modal-close svg{width:18px;height:18px;stroke:var(--forest);fill:none;stroke-width:2;}
+.modal-eyebrow{font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:10px;font-family:var(--sans);}
+.modal-title{font-family:var(--serif);font-size:34px;font-weight:300;color:var(--forest);line-height:1.2;margin-bottom:8px;}
+.modal-sub{font-size:14px;color:var(--muted);margin-bottom:32px;line-height:1.6;}
+.form-group{margin-bottom:18px;}
+.form-label{display:block;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--forest);margin-bottom:7px;font-weight:500;font-family:var(--sans);}
+.form-input{width:100%;background:var(--white);border:1px solid var(--mist);padding:13px 15px;font-family:var(--sans);font-size:14px;color:var(--ink);outline:none;border-radius:2px;transition:border-color 0.2s;-webkit-appearance:none;appearance:none;}
+.form-input:focus{border-color:var(--gold);}
+.form-input::placeholder{color:var(--muted);}
+.interest-label{display:block;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--forest);margin-bottom:10px;font-weight:500;font-family:var(--sans);}
+.interest-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-bottom:24px;}
+.interest-opt{position:relative;}
+.interest-opt input[type="checkbox"]{position:absolute;opacity:0;width:0;height:0;}
+.interest-opt label{display:flex;align-items:center;gap:10px;padding:11px 14px;border:1px solid var(--mist);background:var(--white);cursor:pointer;font-size:13px;color:var(--forest);font-weight:400;border-radius:2px;transition:all 0.2s;user-select:none;font-family:var(--sans);}
+.interest-opt label::before{content:'';width:15px;height:15px;border:1.5px solid var(--mist);border-radius:2px;flex-shrink:0;transition:all 0.2s;background:transparent;}
+.interest-opt input:checked+label{border-color:var(--gold);background:rgba(184,137,42,0.04);}
+.interest-opt input:checked+label::before{background:var(--gold);border-color:var(--gold);}
+.btn-submit{width:100%;background:var(--forest);color:var(--cream);border:none;padding:15px;font-family:var(--sans);font-size:13px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;border-radius:2px;transition:background 0.2s;}
+.btn-submit:hover{background:var(--sage);}
+.form-note{font-size:11px;color:var(--muted);text-align:center;margin-top:14px;line-height:1.6;}
+.form-success{text-align:center;padding:16px 0;display:none;}
+.form-success-icon{width:52px;height:52px;background:rgba(184,137,42,0.1);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 18px;}
+.form-success-icon svg{width:22px;height:22px;stroke:var(--gold);fill:none;stroke-width:2;}
+.form-success h3{font-family:var(--serif);font-size:26px;font-weight:300;color:var(--forest);margin-bottom:8px;}
+.form-success p{font-size:14px;color:var(--muted);line-height:1.7;}
+@media(max-width:640px){.modal{padding:36px 20px;}.interest-grid{grid-template-columns:1fr;}.modal-title{font-size:26px;}}
+
+/* ─── NOISE TEXTURE OVERLAY ─── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.4;
+}
+
+/* ─── NAVIGATION ─── */
+header {
+  position: fixed;
+  top: 36px; left: 0; right: 0;
+  z-index: 1000;
+  padding: 28px 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(245,240,232,0.95);
+  backdrop-filter: blur(16px);
+  transition: background 0.4s ease, padding 0.4s ease, top 0.4s ease, border-color 0.4s ease;
+  border-bottom: 1px solid transparent;
+}
+
+header.scrolled {
+  background: rgba(245,240,232,0.97);
+  backdrop-filter: blur(20px);
+  padding: 18px 60px;
+  border-bottom: 1px solid rgba(184,137,42,0.12);
+  top: 0;
+}
+
+.logo {
+  font-family: var(--serif);
+  font-size: 22px;
+  font-weight: 300;
+  letter-spacing: 0.08em;
+  color: var(--forest);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo-mark {
+  width: 32px;
+  height: 32px;
+  border: 1.5px solid var(--gold);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--gold);
+  letter-spacing: 0;
+  flex-shrink: 0;
+}
+
+nav {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+
+nav a {
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+nav a:hover { color: var(--forest); }
+
+.nav-cta {
+  background: var(--forest) !important;
+  color: var(--cream) !important;
+  padding: 11px 24px;
+  border-radius: 2px;
+  letter-spacing: 0.1em !important;
+  transition: background 0.3s ease !important;
+}
+
+.nav-cta:hover { background: var(--gold) !important; color: var(--white) !important; }
+
+/* ═══ SERVICES DROPDOWN ═══ */
+.nav-dropdown { position: relative; }
+.nav-dropdown > a {
+  display: flex; align-items: center; gap: 5px;
+}
+.nav-dropdown > a svg {
+  width: 10px; height: 10px;
+  stroke: currentColor; fill: none; stroke-width: 2.5;
+  transition: transform 0.2s;
+  flex-shrink: 0;
+}
+.nav-dropdown:hover > a svg { transform: rotate(180deg); }
+.dropdown-menu {
+  position: absolute;
+  top: calc(100% + 16px);
+  left: 50%;
+  background: var(--cream);
+  border: 1px solid var(--mist);
+  border-radius: 4px;
+  min-width: 240px;
+  box-shadow: 0 12px 40px rgba(14,23,18,0.15);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateX(-50%) translateY(8px);
+  transition: opacity 0.25s ease, visibility 0.25s ease, transform 0.25s ease;
+  z-index: 2000;
+  overflow: hidden;
+}
+.nav-dropdown:hover .dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+}
+.dropdown-menu::before {
+  content: '';
+  position: absolute;
+  top: -5px; left: 50%;
+  transform: translateX(-50%) rotate(45deg);
+  width: 10px; height: 10px;
+  background: var(--cream);
+  border-left: 1px solid var(--mist);
+  border-top: 1px solid var(--mist);
+}
+.dropdown-item {
+  display: flex; align-items: center; gap: 12px;
+  padding: 14px 20px;
+  font-family: var(--sans) !important;
+  font-size: 13px !important;
+  font-weight: 400 !important;
+  letter-spacing: 0.04em !important;
+  text-transform: none !important;
+  color: var(--forest) !important;
+  text-decoration: none;
+  transition: background 0.15s;
+  border-bottom: 1px solid var(--mist);
+  opacity: 1 !important;
+}
+.dropdown-item:last-child { border-bottom: none; }
+.dropdown-item:hover { background: rgba(184,137,42,0.06) !important; color: var(--forest) !important; }
+.dropdown-item-icon {
+  width: 28px; height: 28px;
+  background: var(--forest);
+  border-radius: 2px;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.dropdown-item-icon svg { width: 13px; height: 13px; stroke: var(--gold); fill: none; stroke-width: 1.5; }
+.dropdown-item-text { display: flex; flex-direction: column; gap: 2px; }
+.dropdown-item-label { font-size: 13px; font-weight: 500; color: var(--forest); }
+.dropdown-item-sub { font-size: 11px; color: var(--muted); font-weight: 300; }
+
+/* ─── HERO ─── */
+.hero {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-left {
+  background: var(--forest);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: calc(36px + 90px) 80px 100px 80px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-left::before {
+  content: '';
+  position: absolute;
+  top: -200px; right: -200px;
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(184,137,42,0.15) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.hero-eyebrow {
+  font-family: var(--sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--gold-light);
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  opacity: 0;
+  animation: fadeUp 0.8s ease 0.4s forwards;
+}
+
+.hero-eyebrow::before {
+  content: '';
+  display: block;
+  width: 32px;
+  height: 1px;
+  background: var(--gold-light);
+  opacity: 0.5;
+}
+
+.hero-h1 {
+  font-family: var(--serif);
+  font-size: clamp(52px, 5.5vw, 80px);
+  font-weight: 300;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: var(--cream);
+  margin-bottom: 36px;
+  opacity: 0;
+  animation: fadeUp 0.8s ease 0.6s forwards;
+}
+
+.hero-h1 em {
+  font-style: italic;
+  color: var(--gold-light);
+}
+
+.hero-sub {
+  font-family: var(--sans);
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.7;
+  color: rgba(245,240,232,0.7);
+  max-width: 360px;
+  margin-bottom: 52px;
+  opacity: 0;
+  animation: fadeUp 0.8s ease 0.8s forwards;
+}
+
+.hero-actions {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  opacity: 0;
+  animation: fadeUp 0.8s ease 1s forwards;
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--gold);
+  color: var(--white);
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 16px 32px;
+  border-radius: 2px;
+  transition: background 0.3s, transform 0.3s;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-primary:hover {
+  background: var(--gold-light);
+  transform: translateY(-2px);
+}
+
+.btn-ghost {
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  color: rgba(245,240,232,0.55);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: color 0.2s;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.btn-ghost:hover { color: var(--cream); }
+
+.hero-right {
+  background: var(--cream);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+}
+
+/* Large decorative number */
+.hero-deco-number {
+  position: absolute;
+  bottom: -60px;
+  right: -30px;
+  font-family: var(--serif);
+  font-size: 280px;
+  font-weight: 300;
+  line-height: 1;
+  color: rgba(26,48,40,0.06);
+  pointer-events: none;
+  user-select: none;
+  letter-spacing: -0.05em;
+}
+
+.hero-stats {
+  position: relative;
+  z-index: 1;
+  padding: 80px 80px 100px;
+  width: 100%;
+  opacity: 0;
+  animation: fadeUp 0.8s ease 1.2s forwards;
+}
+
+.hero-stats-label {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 48px;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: rgba(26,48,40,0.08);
+  border: 1px solid rgba(26,48,40,0.08);
+}
+
+.stat-cell {
+  background: var(--cream);
+  padding: 40px 36px;
+  position: relative;
+  overflow: hidden;
+  transition: background 0.3s;
+}
+
+.stat-cell:hover { background: #f0ebe0; }
+
+.stat-number {
+  font-family: var(--serif);
+  font-size: 72px;
+  font-weight: 300;
+  color: var(--forest);
+  line-height: 1;
+  margin-bottom: 10px;
+  letter-spacing: -0.03em;
+  transition: color 0.3s;
+}
+
+.stat-cell:hover .stat-number { color: var(--gold); }
+
+.stat-label {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.stat-cell::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 3px;
+  height: 0;
+  background: var(--gold);
+  transition: height 0.5s ease;
+}
+
+.stat-cell:hover::before { height: 100%; }
+
+.stat-cell::after {
+  content: attr(data-val);
+  position: absolute;
+  bottom: -10px; right: -8px;
+  font-family: var(--serif);
+  font-size: 88px;
+  font-weight: 300;
+  color: rgba(26,48,40,0.04);
+  line-height: 1;
+  pointer-events: none;
+  letter-spacing: -0.04em;
+}
+
+/* Diagonal divider */
+.hero-divider {
+  position: absolute;
+  top: 0; bottom: 0;
+  left: 50%;
+  width: 60px;
+  margin-left: -30px;
+  background: var(--cream);
+  clip-path: polygon(30px 0, 100% 0, 30px 100%, 0 100%);
+  z-index: 10;
+  pointer-events: none;
+}
+
+/* ─── SECTION: MARQUEE ─── */
+.marquee-section {
+  background: var(--forest);
+  padding: 18px 0;
+  overflow: hidden;
+  border-top: 1px solid rgba(184,137,42,0.15);
+  border-bottom: 1px solid rgba(184,137,42,0.15);
+}
+
+.marquee-track {
+  display: flex;
+  gap: 0;
+  animation: marqueeScroll 30s linear infinite;
+  width: max-content;
+}
+
+.marquee-item {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  padding: 0 40px;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(184,137,42,0.6);
+  white-space: nowrap;
+}
+
+.marquee-dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--gold);
+  opacity: 0.4;
+}
+
+@keyframes marqueeScroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+/* ─── SECTION BASE ─── */
+.section {
+  padding: 120px 60px;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.section-full {
+  padding: 120px 60px;
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 20px;
+}
+
+.tag::before {
+  content: '';
+  display: block;
+  width: 20px;
+  height: 1px;
+  background: var(--gold);
+}
+
+.h2 {
+  font-family: var(--serif);
+  font-size: clamp(40px, 4vw, 64px);
+  font-weight: 300;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--forest);
+}
+
+.h2 em { font-style: italic; color: var(--gold); }
+
+/* ─── SERVICES ─── */
+.services-section {
+  background: var(--cream);
+}
+
+.services-layout {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 120px 60px;
+  display: grid;
+  grid-template-columns: 380px 1fr;
+  gap: 100px;
+  align-items: start;
+}
+
+.services-sticky {
+  position: sticky;
+  top: 120px;
+}
+
+.services-intro {
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.8;
+  color: rgba(14,23,18,0.6);
+  margin-top: 28px;
+  margin-bottom: 44px;
+}
+
+.services-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.service-item {
+  border-top: 1px solid rgba(26,48,40,0.1);
+  padding: 28px 0;
+  display: grid;
+  grid-template-columns: 28px 1fr 20px;
+  gap: 20px;
+  align-items: start;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.service-item:last-child { border-bottom: 1px solid rgba(26,48,40,0.1); }
+
+.service-num {
+  font-family: var(--serif);
+  font-size: 13px;
+  font-weight: 300;
+  color: var(--gold);
+  padding-top: 3px;
+}
+
+.service-content h3 {
+  font-family: var(--serif);
+  font-size: 22px;
+  font-weight: 400;
+  color: var(--forest);
+  margin-bottom: 8px;
+  transition: color 0.2s;
+}
+
+.service-content p {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.7;
+  color: rgba(14,23,18,0.6);
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease, opacity 0.3s ease;
+  opacity: 0;
+}
+
+.service-item.active .service-content p {
+  max-height: 100px;
+  opacity: 1;
+}
+
+.service-item.active h3 { color: var(--gold); }
+
+.service-arrow {
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--muted);
+  transition: transform 0.3s ease, color 0.2s;
+  padding-top: 4px;
+}
+
+.service-item.active .service-arrow {
+  transform: rotate(45deg);
+  color: var(--gold);
+}
+
+/* ─── WHY SMP ─── */
+.why-section {
+  background: var(--forest);
+  position: relative;
+  overflow: hidden;
+}
+
+.why-section::before {
+  content: 'SMP';
+  position: absolute;
+  bottom: -60px;
+  left: -40px;
+  font-family: var(--serif);
+  font-size: 240px;
+  font-weight: 300;
+  color: rgba(255,255,255,0.03);
+  letter-spacing: -0.05em;
+  pointer-events: none;
+  user-select: none;
+}
+
+.why-layout {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 120px 60px;
+}
+
+.why-header {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  margin-bottom: 80px;
+  align-items: end;
+}
+
+.why-h2 {
+  font-family: var(--serif);
+  font-size: clamp(40px, 4vw, 64px);
+  font-weight: 300;
+  line-height: 1.1;
+  color: var(--cream);
+  letter-spacing: -0.02em;
+}
+
+.why-h2 em { font-style: italic; color: var(--gold-light); }
+
+.why-intro {
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 1.8;
+  color: rgba(245,240,232,0.5);
+  padding-bottom: 4px;
+}
+
+.why-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: rgba(184,137,42,0.12);
+  border: 1px solid rgba(184,137,42,0.12);
+}
+
+.why-card {
+  background: var(--forest);
+  padding: 48px 40px;
+  position: relative;
+  overflow: hidden;
+  transition: background 0.3s;
+}
+
+.why-card:hover { background: var(--sage); }
+
+.why-card-num {
+  font-family: var(--serif);
+  font-size: 64px;
+  font-weight: 300;
+  color: rgba(184,137,42,0.15);
+  line-height: 1;
+  margin-bottom: 28px;
+  letter-spacing: -0.02em;
+  transition: color 0.3s;
+}
+
+.why-card:hover .why-card-num { color: rgba(184,137,42,0.3); }
+
+.why-card h3 {
+  font-family: var(--serif);
+  font-size: 22px;
+  font-weight: 400;
+  color: var(--cream);
+  margin-bottom: 16px;
+  line-height: 1.3;
+}
+
+.why-card p {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.75;
+  color: rgba(245,240,232,0.75);
+}
+
+/* ─── PROCESS ─── */
+.process-section {
+  background: var(--cream);
+}
+
+.process-layout {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 120px 60px;
+}
+
+.process-header {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: end;
+  margin-bottom: 80px;
+}
+
+.process-steps {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 48px;
+  position: relative;
+}
+
+.process-steps::before {
+  content: '';
+  position: absolute;
+  top: 24px;
+  left: calc(50% / 3);
+  right: calc(50% / 3);
+  height: 1px;
+  background: linear-gradient(90deg, var(--gold) 0%, transparent 100%);
+  opacity: 0.3;
+}
+
+.process-step {
+  position: relative;
+}
+
+.step-icon {
+  width: 48px;
+  height: 48px;
+  border: 1.5px solid rgba(26,48,40,0.15);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 28px;
+  position: relative;
+  background: var(--cream);
+  transition: border-color 0.3s, background 0.3s;
+}
+
+.step-icon svg { width: 18px; height: 18px; stroke: var(--gold); fill: none; stroke-width: 1.5; }
+
+.process-step:hover .step-icon {
+  border-color: var(--gold);
+  background: var(--forest);
+}
+
+.process-step:hover .step-icon svg { stroke: var(--cream); }
+
+.step-num {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  width: 18px;
+  height: 18px;
+  background: var(--gold);
+  color: white;
+  font-size: 9px;
+  font-weight: 500;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.process-step h3 {
+  font-family: var(--serif);
+  font-size: 22px;
+  font-weight: 400;
+  color: var(--forest);
+  margin-bottom: 12px;
+}
+
+.process-step p {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.75;
+  color: rgba(14,23,18,0.7);
+}
+
+/* ─── TESTIMONIALS ─── */
+.testimonials-section {
+  background: var(--mist);
+  position: relative;
+}
+
+.testimonials-layout {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 120px 60px;
+}
+
+.testimonials-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 60px;
+}
+
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.testimonial-card {
+  background: var(--white);
+  padding: 44px 40px;
+  position: relative;
+  border-left: 2px solid transparent;
+  transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+}
+
+.testimonial-card:hover {
+  border-color: var(--gold);
+  transform: translateY(-4px);
+  box-shadow: 0 20px 60px rgba(26,48,40,0.08);
+}
+
+.testimonial-quote-mark {
+  font-family: var(--serif);
+  font-size: 80px;
+  line-height: 0.6;
+  color: var(--gold);
+  opacity: 0.2;
+  margin-bottom: 20px;
+  display: block;
+}
+
+.testimonial-text {
+  font-family: var(--serif);
+  font-size: 17px;
+  font-weight: 300;
+  font-style: italic;
+  line-height: 1.7;
+  color: var(--forest);
+  margin-bottom: 32px;
+}
+
+.testimonial-author {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.testimonial-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--forest);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--serif);
+  font-size: 16px;
+  font-weight: 300;
+  color: var(--gold-light);
+  flex-shrink: 0;
+}
+
+.testimonial-name {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--forest);
+}
+
+.testimonial-role {
+  font-size: 12px;
+  font-weight: 300;
+  color: var(--muted);
+  margin-top: 2px;
+}
+
+.star-row {
+  display: flex;
+  gap: 3px;
+  margin-bottom: 20px;
+}
+
+.star { color: var(--gold); font-size: 14px; }
+
+/* ─── CTA ─── */
+.cta-section {
+  background: var(--ink);
+  position: relative;
+  overflow: hidden;
+}
+
+.cta-section::before {
+  content: '';
+  position: absolute;
+  top: -300px; right: -300px;
+  width: 700px; height: 700px;
+  background: radial-gradient(circle, rgba(184,137,42,0.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.cta-layout {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 140px 60px;
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: 100px;
+  align-items: center;
+}
+
+.cta-h2 {
+  font-family: var(--serif);
+  font-size: clamp(44px, 4.5vw, 72px);
+  font-weight: 300;
+  line-height: 1.05;
+  color: var(--cream);
+  letter-spacing: -0.02em;
+  margin-bottom: 28px;
+}
+
+.cta-h2 em { font-style: italic; color: var(--gold-light); }
+
+.cta-sub {
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 1.8;
+  color: rgba(245,240,232,0.4);
+  margin-bottom: 52px;
+}
+
+.cta-btn-row {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+
+.btn-cream {
+  background: var(--cream);
+  color: var(--forest);
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 16px 32px;
+  border-radius: 2px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  transition: background 0.3s, transform 0.3s;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-cream:hover { background: var(--gold-light); color: var(--white); transform: translateY(-2px); }
+
+.btn-outline {
+  border: 1px solid rgba(245,240,232,0.2);
+  color: rgba(245,240,232,0.55);
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 16px 28px;
+  border-radius: 2px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.3s;
+}
+
+.btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+
+.cta-trust {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.trust-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  padding: 24px 28px;
+  border: 1px solid rgba(184,137,42,0.12);
+  border-radius: 2px;
+  transition: border-color 0.3s, background 0.3s;
+}
+
+.trust-item:hover {
+  border-color: rgba(184,137,42,0.3);
+  background: rgba(184,137,42,0.04);
+}
+
+.trust-icon {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: var(--gold);
+}
+
+.trust-icon svg { width: 22px; height: 22px; stroke: currentColor; fill: none; stroke-width: 1.5; }
+
+.trust-title {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--cream);
+  margin-bottom: 4px;
+}
+
+.trust-desc {
+  font-size: 12px;
+  font-weight: 300;
+  color: rgba(245,240,232,0.35);
+  line-height: 1.5;
+}
+
+/* ─── FOOTER ─── */
+footer {
+  background: var(--forest);
+  padding: 80px 60px 40px;
+}
+
+.footer-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.footer-top {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 60px;
+  padding-bottom: 60px;
+  border-bottom: 1px solid rgba(184,137,42,0.12);
+  margin-bottom: 40px;
+}
+
+.footer-brand p {
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.7;
+  color: rgba(245,240,232,0.5);
+  margin-top: 20px;
+  max-width: 300px;
+}
+
+.footer-col h4 {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 20px;
+}
+
+.footer-col a {
+  display: block;
+  font-size: 13px;
+  font-weight: 400;
+  color: rgba(245,240,232,0.5);
+  text-decoration: none;
+  margin-bottom: 12px;
+  transition: color 0.2s;
+}
+
+.footer-col a:hover { color: var(--cream); }
+
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 11px;
+  font-weight: 400;
+  color: rgba(245,240,232,0.35);
+}
+
+.footer-logo {
+  font-family: var(--serif);
+  font-size: 18px;
+  font-weight: 300;
+  letter-spacing: 0.08em;
+  color: rgba(245,240,232,0.5);
+  text-decoration: none;
+}
+
+/* ─── FAQ SECTION ─── */
+.faq-section { background: var(--cream); }
+
+.faq-layout {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 120px 60px;
+  display: grid;
+  grid-template-columns: 380px 1fr;
+  gap: 100px;
+  align-items: start;
+}
+
+.faq-sticky { position: sticky; top: 120px; }
+
+.faq-list { display: flex; flex-direction: column; gap: 0; }
+
+.faq-item {
+  border-top: 1px solid rgba(26,48,40,0.1);
+  overflow: hidden;
+}
+
+.faq-item:last-child { border-bottom: 1px solid rgba(26,48,40,0.1); }
+
+.faq-q {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px 0;
+  cursor: pointer;
+  gap: 20px;
+}
+
+.faq-q-text {
+  font-family: var(--serif);
+  font-size: 20px;
+  font-weight: 400;
+  color: var(--forest);
+  line-height: 1.3;
+  transition: color 0.2s;
+}
+
+.faq-item.open .faq-q-text { color: var(--gold); }
+
+.faq-toggle {
+  width: 28px;
+  height: 28px;
+  border: 1.5px solid rgba(26,48,40,0.15);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: var(--muted);
+  transition: all 0.3s;
+}
+
+.faq-item.open .faq-toggle {
+  background: var(--gold);
+  border-color: var(--gold);
+  color: var(--white);
+  transform: rotate(45deg);
+}
+
+.faq-a {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease, padding 0.3s ease;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.8;
+  color: rgba(14,23,18,0.7);
+  padding: 0;
+}
+
+.faq-item.open .faq-a { max-height: 200px; padding-bottom: 24px; }
+
+/* ─── SCROLL ANIMATIONS ─── */
+.reveal {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal.delay-1 { transition-delay: 0.1s; }
+.reveal.delay-2 { transition-delay: 0.2s; }
+.reveal.delay-3 { transition-delay: 0.3s; }
+.reveal.delay-4 { transition-delay: 0.4s; }
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ─── HAMBURGER ─── */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+}
+
+.hamburger span {
+  display: block;
+  width: 24px;
+  height: 1.5px;
+  background: var(--forest);
+  transition: all 0.3s;
+}
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 1024px) {
+  header { padding: 24px 32px; top: 36px; }
+  header.scrolled { padding: 16px 32px; top: 0; }
+  nav { display: none; }
+  .hamburger { display: flex; }
+  .hamburger span { background: var(--forest); }
+
+  .hero { grid-template-columns: 1fr; min-height: auto; }
+  .hero-left { padding: calc(36px + 80px) 40px 60px; }
+  .hero-divider { display: none; }
+  .hero-right { min-height: 400px; }
+  .hero-stats { padding: 60px 40px 80px; }
+  .stats-grid { grid-template-columns: repeat(2, 1fr); }
+
+  .services-layout { grid-template-columns: 1fr; gap: 60px; }
+  .services-sticky { position: static; }
+
+  .why-header { grid-template-columns: 1fr; gap: 32px; }
+  .why-grid { grid-template-columns: 1fr 1fr; }
+
+  .process-header { grid-template-columns: 1fr; gap: 28px; }
+  .process-steps { grid-template-columns: 1fr; }
+  .process-steps::before { display: none; }
+
+  .testimonials-grid { grid-template-columns: 1fr; gap: 20px; }
+  .testimonials-header { flex-direction: column; align-items: flex-start; gap: 16px; }
+
+  .cta-layout { grid-template-columns: 1fr; gap: 60px; }
+  .faq-layout { grid-template-columns: 1fr; gap: 60px; }
+  .faq-sticky { position: static; }
+
+  .footer-top { grid-template-columns: 1fr 1fr; gap: 40px; }
+  .section, .section-full { padding: 80px 32px; }
+  .services-layout, .why-layout, .process-layout, .testimonials-layout, .cta-layout, .faq-layout { padding: 80px 32px; }
+}
+
+@media (max-width: 640px) {
+  /* ── HERO ── */
+  .hero-left { padding: calc(36px + 70px) 20px 48px; }
+  .hero-h1 { font-size: 34px; letter-spacing: -0.01em; margin-bottom: 20px; }
+  .hero-sub { font-size: 14px; margin-bottom: 32px; max-width: 100%; }
+  .hero-actions { flex-direction: column; align-items: stretch; gap: 12px; }
+  .hero-actions .btn-primary { width: 100%; justify-content: center; }
+  .hero-actions .btn-ghost { justify-content: center; }
+  .hero-right { min-height: auto; }
+  .hero-stats { padding: 40px 20px 48px; }
+  .hero-stats-label { margin-bottom: 28px; }
+  .stats-grid { grid-template-columns: 1fr 1fr; gap: 1px; }
+  .stat-cell { padding: 24px 20px; }
+  .stat-number { font-size: 40px; }
+  .hero-deco-number { font-size: 160px; bottom: -30px; right: -10px; }
+
+  /* ── TRUSTED BY ── */
+  .trusted-by-strip { padding: 28px 20px !important; }
+  .trusted-by-row { grid-template-columns: 1fr 1fr !important; }
+  .trusted-by-row > div { border-right: none !important; border-bottom: 1px solid var(--mist); padding: 20px 12px !important; }
+  .trusted-by-row > div:nth-child(1) { border-right: 1px solid var(--mist) !important; }
+  .trusted-by-row > div:nth-child(3) { border-right: 1px solid var(--mist) !important; border-bottom: none; }
+  .trusted-by-row > div:nth-child(4) { border-bottom: none; }
+
+  /* ── MARQUEE ── */
+  .marquee-item { font-size: 11px; padding: 0 20px; }
+
+  /* ── SERVICES ── */
+  .services-layout, .why-layout, .process-layout,
+  .testimonials-layout, .cta-layout, .faq-layout { padding: 60px 20px; }
+  .service-item { padding: 22px 0; grid-template-columns: 24px 1fr 20px; gap: 14px; }
+  .service-content h3 { font-size: 20px; }
+  .service-num { font-size: 12px; }
+
+  /* ── WHY GRID ── */
+  .why-grid { grid-template-columns: 1fr; }
+  .why-card { padding: 32px 24px; }
+
+  /* ── FOOTER ── */
+  .footer-top { grid-template-columns: 1fr; }
+  .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
+  footer { padding: 60px 20px 80px; }
+  .footer-top { grid-template-columns: 1fr; gap: 32px; padding-bottom: 40px; }
+  .footer-brand p { max-width: 100%; }
+
+  /* ── CTA ── */
+  .cta-btn-row { flex-direction: column; align-items: flex-start; gap: 12px; }
+
+  /* ── CLIENTS ── */
+  .clients-section { padding: 60px 20px; }
+  .clients-stats { grid-template-columns: repeat(3, 1fr); gap: 8px; }
+  .clients-stat-val { font-size: 22px; }
+  .clients-actions { flex-direction: column; }
+  .clients-h2 { font-size: 32px; }
+
+  /* ── HEADER ── */
+  header { padding: 16px 20px; top: 36px; }
+  header.scrolled { padding: 14px 20px; top: 0; }
+  .logo { font-size: 16px; }
+  .logo span.logo-text-hide { display: none; }
+}
+
+/* ═══ MOBILE MENU ═══ */
+.mobile-menu {
+  position: fixed;
+  inset: 0;
+  background: var(--forest);
+  z-index: 10000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.4s ease, visibility 0.4s ease;
+  padding: 40px 20px;
+}
+.mobile-menu.open { opacity: 1; visibility: visible; }
+.mobile-menu-link {
+  font-family: var(--serif);
+  font-size: clamp(28px, 8vw, 40px);
+  font-weight: 300;
+  color: rgba(245,240,232,0.65);
+  text-decoration: none;
+  letter-spacing: -0.01em;
+  transition: color 0.2s;
+  padding: 8px 0;
+  display: block;
+  text-align: center;
+}
+.mobile-menu-link:hover, .mobile-menu-link:active { color: var(--gold-light); }
+.mobile-menu-cta-btn {
+  margin-top: 28px;
+  background: var(--gold);
+  color: var(--forest);
+  font-family: var(--sans);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 14px 40px;
+  border-radius: 2px;
+  text-decoration: none;
+  display: inline-block;
+  transition: background 0.2s;
+}
+.mobile-menu-cta-btn:hover { background: var(--gold-light); }
+.mobile-menu-close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  color: rgba(245,240,232,0.4);
+  transition: color 0.2s;
+}
+.mobile-menu-close:hover { color: var(--cream); }
+.mobile-menu-close svg { width: 24px; height: 24px; stroke: currentColor; fill: none; stroke-width: 1.5; }
+.mobile-menu-divider { width: 32px; height: 1px; background: rgba(184,137,42,0.25); margin: 12px auto; }
+
+.floating-cta {
+  position: fixed;
+  bottom: 36px;
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  z-index: 8500;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.4s ease, transform 0.4s ease, visibility 0.4s ease;
+}
+
+.floating-cta.visible {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateX(-50%) translateY(0);
+}
+
+.floating-cta-inner {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: var(--forest);
+  border: 1px solid rgba(184,137,42,0.25);
+  border-radius: 999px;
+  padding: 14px 24px 14px 20px;
+  box-shadow: 0 8px 40px rgba(14,23,18,0.25), 0 2px 8px rgba(14,23,18,0.12);
+  backdrop-filter: blur(12px);
+  cursor: pointer;
+  text-decoration: none;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s;
+}
+
+.floating-cta-inner:hover {
+  background: var(--sage);
+  transform: translateY(-3px);
+  box-shadow: 0 16px 48px rgba(14,23,18,0.3), 0 4px 12px rgba(14,23,18,0.15);
+}
+
+.floating-cta-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #4ade80;
+  box-shadow: 0 0 0 3px rgba(74,222,128,0.2);
+  flex-shrink: 0;
+  animation: ctaPulse 2s ease-in-out infinite;
+}
+
+@keyframes ctaPulse {
+  0%, 100% { box-shadow: 0 0 0 3px rgba(74,222,128,0.2); }
+  50% { box-shadow: 0 0 0 6px rgba(74,222,128,0.1); }
+}
+
+.floating-cta-text {
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  color: var(--cream);
+  white-space: nowrap;
+}
+
+.floating-cta-pill {
+  background: var(--gold);
+  color: white;
+  font-family: var(--sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 6px 14px;
+  border-radius: 999px;
+  white-space: nowrap;
+  transition: background 0.2s;
+}
+
+.floating-cta, .floating-cta:visited, .floating-cta:hover {
+  text-decoration: none;
+}
+
+.floating-cta-inner:hover .floating-cta-pill { background: var(--gold-light); }
+
+/* ─── FLOATING CTA: MOBILE ─── */
+@media (max-width: 640px) {
+  .floating-cta {
+    bottom: 20px;
+    left: 12px;
+    right: 12px;
+    width: auto;
+    transform: translateX(0) translateY(20px);
+  }
+  .floating-cta.visible {
+    transform: translateX(0) translateY(0);
+  }
+  .floating-cta-inner {
+    width: 100%;
+    justify-content: space-between;
+    padding: 14px 16px;
+    gap: 12px;
+    box-shadow: 0 10px 40px rgba(14,23,18,0.35), 0 4px 12px rgba(14,23,18,0.2);
+    border: 1.5px solid rgba(184,137,42,0.4);
+  }
+  .floating-cta-text { font-size: 13px; font-weight: 500; letter-spacing: 0.03em; }
+  .floating-cta-pill { font-size: 11px; font-weight: 600; padding: 8px 18px; letter-spacing: 0.08em; }
+  .floating-cta-dot { width: 8px; height: 8px; }
+}
+
+/* ═══ SERVICE PAGE CSS ═══ */
+.section-tag{font-family:var(--sans);font-size:11px;font-weight:500;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:10px;margin-bottom:20px;}
+.section-tag::before{content:'';display:block;width:24px;height:1px;background:var(--gold);opacity:0.6;}
+.section-h2{font-family:var(--serif);font-size:clamp(36px,4vw,56px);font-weight:300;line-height:1.15;letter-spacing:-0.01em;color:var(--forest);margin-bottom:16px;}
+.section-h2 em{font-style:italic;color:var(--gold);}
+.section-intro{font-size:15px;font-weight:300;line-height:1.8;color:var(--muted);max-width:520px;margin-bottom:64px;}
+.types-section{background:var(--cream);}
+.types-layout{max-width:1280px;margin:0 auto;padding:100px 60px;}
+.types-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:rgba(26,48,40,0.08);border:1px solid rgba(26,48,40,0.08);}
+.type-card{background:var(--cream);padding:48px 44px;transition:background 0.3s;}
+.type-card:hover{background:#ede8df;}
+.type-card-num{font-family:var(--serif);font-size:48px;font-weight:300;color:rgba(26,48,40,0.08);line-height:1;margin-bottom:20px;}
+.type-card h3{font-family:var(--serif);font-size:24px;font-weight:400;color:var(--forest);margin-bottom:14px;}
+.type-card p{font-size:14px;font-weight:400;line-height:1.75;color:rgba(14,23,18,0.6);}
+.type-card-tag{display:inline-block;margin-top:20px;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);border-bottom:1px solid rgba(184,137,42,0.3);padding-bottom:2px;}
+.hero-deco{position:absolute;right:-20px;bottom:-60px;font-family:var(--serif);font-size:320px;font-weight:300;color:rgba(245,240,232,0.04);line-height:1;pointer-events:none;user-select:none;}
+.btn-outline-cream{display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(245,240,232,0.25);color:rgba(245,240,232,0.7);font-family:var(--sans);font-size:13px;letter-spacing:0.08em;text-transform:uppercase;text-decoration:none;padding:16px 32px;border-radius:2px;transition:all 0.2s;background:none;cursor:pointer;}
+.btn-outline-cream:hover{border-color:rgba(245,240,232,0.6);color:var(--cream);}
+.svc-hero{min-height:80vh;background:var(--forest);display:flex;align-items:center;position:relative;overflow:hidden;padding:calc(36px + 100px) 60px 100px;}
+.svc-hero::before{content:'';position:absolute;inset:0;background-image:repeating-linear-gradient(-45deg,transparent,transparent 40px,rgba(184,137,42,0.025) 40px,rgba(184,137,42,0.025) 41px);pointer-events:none;}
+.svc-hero-inner{max-width:800px;position:relative;z-index:1;}
+.svc-hero-eyebrow{font-size:11px;font-weight:500;letter-spacing:0.25em;text-transform:uppercase;color:var(--gold-light);margin-bottom:24px;display:flex;align-items:center;gap:12px;}
+.svc-hero-eyebrow::before{content:'';display:block;width:32px;height:1px;background:var(--gold-light);opacity:0.5;}
+.svc-hero h1{font-family:var(--serif);font-size:clamp(48px,6vw,88px);font-weight:300;line-height:1.05;letter-spacing:-0.02em;color:var(--cream);margin-bottom:28px;}
+.svc-hero h1 em{font-style:italic;color:var(--gold-light);}
+.svc-hero-sub{font-size:16px;font-weight:400;line-height:1.75;color:rgba(245,240,232,0.75);max-width:520px;margin-bottom:48px;}
+.svc-hero-actions{display:flex;align-items:center;gap:24px;flex-wrap:wrap;}
+.svc-hero-trust{display:flex;gap:40px;margin-top:64px;padding-top:40px;border-top:1px solid rgba(245,240,232,0.1);}
+.svc-hero-trust-item{display:flex;align-items:center;gap:10px;}
+.svc-hero-trust-item svg{width:16px;height:16px;stroke:var(--gold);fill:none;stroke-width:1.5;flex-shrink:0;}
+.svc-hero-trust-item span{font-size:12px;color:rgba(245,240,232,0.5);letter-spacing:0.06em;}
+.svc-process-section{background:var(--forest);}
+.svc-process-layout{max-width:1280px;margin:0 auto;padding:100px 60px;}
+.svc-process-header{margin-bottom:72px;}
+.svc-process-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:48px;position:relative;}
+.svc-process-steps::before{content:'';position:absolute;top:24px;left:calc(50%/3);right:calc(50%/3);height:1px;background:linear-gradient(90deg,var(--gold) 0%,transparent 100%);opacity:0.2;}
+.svc-process-step{position:relative;}
+.svc-step-icon{width:48px;height:48px;border:1.5px solid rgba(184,137,42,0.3);border-radius:50%;display:flex;align-items:center;justify-content:center;margin-bottom:28px;position:relative;background:transparent;transition:all 0.3s;}
+.svc-step-icon svg{width:18px;height:18px;stroke:var(--gold);fill:none;stroke-width:1.5;}
+.svc-step-num{position:absolute;top:-6px;right:-6px;width:18px;height:18px;background:var(--gold);color:white;font-size:9px;font-weight:500;border-radius:50%;display:flex;align-items:center;justify-content:center;}
+.svc-process-step h3{font-family:var(--serif);font-size:22px;font-weight:400;color:var(--cream);margin-bottom:12px;}
+.svc-process-step p{font-size:14px;font-weight:400;line-height:1.75;color:rgba(245,240,232,0.65);}
+.svc-why-section{background:var(--cream);}
+.svc-why-layout{max-width:1280px;margin:0 auto;padding:100px 60px;}
+.svc-why-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:rgba(26,48,40,0.08);border:1px solid rgba(26,48,40,0.08);margin-top:60px;}
+.svc-why-card{background:var(--cream);padding:44px 40px;transition:background 0.3s;}
+.svc-why-card:hover{background:#ede8df;}
+.svc-why-icon{width:40px;height:40px;border:1px solid rgba(184,137,42,0.3);border-radius:2px;display:flex;align-items:center;justify-content:center;margin-bottom:20px;}
+.svc-why-icon svg{width:18px;height:18px;stroke:var(--gold);fill:none;stroke-width:1.5;}
+.svc-why-card h3{font-family:var(--serif);font-size:22px;font-weight:400;color:var(--forest);margin-bottom:10px;}
+.svc-why-card p{font-size:14px;font-weight:400;line-height:1.75;color:rgba(14,23,18,0.65);}
+.svc-cta-section{background:var(--forest);padding:100px 60px;text-align:center;position:relative;overflow:hidden;}
+
+/* ─── SERVICE PAGE REVIEW ─── */
+.svc-review-section{background:var(--mist);padding:80px 60px;}
+.svc-review-inner{max-width:720px;margin:0 auto;text-align:center;}
+.svc-review-card{background:white;border:1px solid rgba(26,48,40,0.08);border-radius:20px;padding:44px 40px;box-shadow:0 4px 24px rgba(26,48,40,0.06);}
+.svc-review-stars{display:flex;justify-content:center;gap:3px;margin-bottom:20px;}
+.svc-review-stars span{font-size:16px;color:#FBBF24;}
+.svc-review-quote{font-family:var(--serif);font-size:20px;font-weight:600;font-style:italic;line-height:1.65;color:var(--forest);margin-bottom:28px;}
+.svc-review-author{display:flex;align-items:center;justify-content:center;gap:14px;}
+.svc-review-avatar{width:48px;height:48px;border-radius:10px;background:var(--forest);display:flex;align-items:center;justify-content:center;color:var(--gold);font-family:var(--serif);font-size:16px;font-weight:400;flex-shrink:0;}
+.svc-review-name{font-size:15px;font-weight:600;color:var(--forest);}
+.svc-review-role{font-size:12px;font-weight:400;color:var(--muted);}
+.svc-review-label{font-size:11px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:24px;}
+@media(max-width:640px){
+  .svc-review-section{padding:60px 20px;}
+  .svc-review-card{padding:32px 24px;}
+  .svc-review-quote{font-size:17px;}
+}
+.svc-cta-section::before{content:'';position:absolute;inset:-50%;background:radial-gradient(ellipse at center,rgba(184,137,42,0.07) 0%,transparent 60%);pointer-events:none;}
+.svc-cta-inner{max-width:640px;margin:0 auto;position:relative;}
+.svc-cta-h2{font-family:var(--serif);font-size:clamp(40px,5vw,68px);font-weight:300;line-height:1.1;color:var(--cream);margin-bottom:20px;}
+.svc-cta-h2 em{font-style:italic;color:var(--gold-light);}
+.svc-cta-sub{font-size:15px;font-weight:400;line-height:1.75;color:rgba(245,240,232,0.7);margin-bottom:44px;}
+.svc-cta-actions{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;}
+.svc-cta-trust{display:flex;gap:32px;justify-content:center;margin-top:48px;flex-wrap:wrap;}
+.svc-cta-trust-item{display:flex;align-items:center;gap:8px;font-size:12px;color:rgba(245,240,232,0.35);letter-spacing:0.06em;}
+.svc-cta-trust-item svg{width:14px;height:14px;stroke:var(--gold);fill:none;stroke-width:1.5;opacity:0.6;}
+.back-link{display:inline-flex;align-items:center;gap:8px;font-family:var(--sans);font-size:13px;color:rgba(245,240,232,0.5);text-decoration:none;letter-spacing:0.06em;cursor:pointer;background:none;border:none;transition:color 0.2s;}
+.back-link:hover{color:var(--cream);}
+.back-link svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;}
+
+/* ═══ PAGE ROUTER ═══ */
+.page{display:none;}
+.page.active{display:block;animation:pageIn 0.3s ease forwards;}
+@keyframes pageIn{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
+
+/* ═══ RESPONSIVE EXTRAS ═══ */
+@media(max-width:1024px){
+  .svc-hero{padding:calc(36px + 100px) 32px 80px;}
+  .types-layout,.svc-process-layout,.svc-why-layout{padding:80px 32px;}
+  .svc-cta-section{padding:80px 32px;}
+  .types-grid,.svc-why-grid{grid-template-columns:1fr;}
+  .svc-process-steps{grid-template-columns:1fr;gap:40px;}
+  .svc-process-steps::before{display:none;}
+  .svc-hero-trust{flex-wrap:wrap;gap:20px;}
+}
+@media(max-width:640px){
+  .svc-hero{padding:calc(36px + 80px) 20px 60px;min-height:auto;}
+  .svc-hero h1{font-size:34px;}
+  .svc-hero-sub{font-size:14px;max-width:100%;}
+  .svc-hero-actions{flex-direction:column;align-items:flex-start;gap:16px;width:100%;}
+  .svc-hero-actions .btn-primary{width:100%;justify-content:center;}
+  .svc-hero-actions .back-link{width:100%;justify-content:center;}
+  .svc-hero-trust{flex-direction:column;gap:14px;margin-top:40px;padding-top:32px;}
+  .types-layout,.svc-process-layout,.svc-why-layout{padding:60px 20px;}
+  .svc-cta-section{padding:60px 20px;}
+  .type-card,.svc-why-card{padding:32px 24px;}
+  .svc-cta-actions{flex-direction:column;align-items:stretch;width:100%;max-width:360px;margin:0 auto;}
+  .svc-cta-actions .btn-primary,
+  .svc-cta-actions .btn-outline-cream{width:100%;text-align:center;justify-content:center;}
+  .svc-cta-trust{flex-direction:column;gap:12px;}
+}
+.clients-section {
+  background: var(--mist);
+  padding: 120px 60px;
+}
+
+.clients-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: start;
+}
+
+/* Left: sticky panel */
+.clients-left {
+  position: sticky;
+  top: 120px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.clients-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  border: 1px solid rgba(26,48,40,0.12);
+  border-radius: 999px;
+  background: rgba(26,48,40,0.04);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  width: fit-content;
+}
+
+.clients-tag-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #4ade80;
+  box-shadow: 0 0 0 3px rgba(74,222,128,0.2);
+}
+
+.clients-h2 {
+  font-family: var(--serif);
+  font-size: clamp(36px, 3.5vw, 54px);
+  font-weight: 300;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--forest);
+}
+
+.clients-h2 em { font-style: italic; color: var(--gold); }
+
+.clients-desc {
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.8;
+  color: rgba(14,23,18,0.7);
+}
+
+/* Mini stats row */
+.clients-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.clients-stat {
+  background: white;
+  border: 1px solid rgba(26,48,40,0.08);
+  border-radius: 12px;
+  padding: 18px 16px;
+  text-align: center;
+}
+
+.clients-stat-val {
+  font-family: var(--serif);
+  font-size: 28px;
+  font-weight: 400;
+  color: var(--forest);
+  line-height: 1;
+  margin-bottom: 6px;
+}
+
+.clients-stat-label {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.clients-actions {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.btn-clients-primary {
+  background: var(--forest);
+  color: var(--cream);
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 13px 28px;
+  border-radius: 999px;
+  transition: background 0.3s, transform 0.2s;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-clients-primary:hover { background: var(--gold); transform: translateY(-2px); }
+
+.btn-clients-outline {
+  border: 1.5px solid rgba(26,48,40,0.18);
+  color: var(--forest);
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 13px 28px;
+  border-radius: 999px;
+  transition: border-color 0.3s, color 0.3s;
+  background: transparent;
+  cursor: pointer;
+}
+
+.btn-clients-outline:hover { border-color: var(--gold); color: var(--gold); }
+
+/* Right: stacking cards */
+.clients-right {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  position: relative;
+}
+
+.t-card {
+  background: white;
+  border: 1px solid rgba(26,48,40,0.08);
+  border-radius: 20px;
+  padding: 32px 32px 28px;
+  box-shadow: 0 4px 24px rgba(26,48,40,0.06);
+  position: sticky;
+  top: 100px;
+  transition: box-shadow 0.3s, transform 0.3s;
+  cursor: pointer;
+}
+
+.t-card:hover {
+  box-shadow: 0 8px 32px rgba(26,48,40,0.1);
+  transform: translateY(-2px);
+}
+
+.t-card-top {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+.t-avatar {
+  width: 54px;
+  height: 54px;
+  border-radius: 12px;
+  background-size: cover;
+  background-position: center;
+  flex-shrink: 0;
+  border: 1px solid rgba(26,48,40,0.06);
+}
+
+.t-name {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--forest);
+  margin-bottom: 3px;
+}
+
+.t-role {
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--muted);
+}
+
+.t-rating {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.t-rating-num {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--forest);
+}
+
+.t-stars { display: flex; gap: 2px; }
+.t-star { font-size: 14px; color: #FBBF24; }
+.t-star.empty { color: rgba(26,48,40,0.12); }
+
+.t-quote {
+  font-family: var(--serif);
+  font-size: 19px;
+  font-weight: 600;
+  font-style: italic;
+  line-height: 1.65;
+  color: var(--forest);
+}
+
+@media (max-width: 1024px) {
+  .clients-section { padding: 80px 32px; }
+  .clients-inner { grid-template-columns: 1fr; gap: 48px; }
+  .clients-left { position: static; }
+  .t-card { position: relative !important; top: auto !important; }
+}
+
+@media (max-width: 640px) {
+  .clients-section { padding: 60px 20px 80px; }
+  .clients-stats { grid-template-columns: repeat(3, 1fr); gap: 6px; }
+  .clients-stat { padding: 14px 10px; }
+  .clients-stat-val { font-size: 20px; }
+  .clients-stat-label { font-size: 9px; }
+  .clients-actions { flex-direction: column; align-items: stretch; }
+  .clients-actions .btn-clients-primary,
+  .clients-actions .btn-clients-outline { width: 100%; text-align: center; justify-content: center; }
+  .clients-h2 { font-size: 30px; }
+  .clients-desc { font-size: 14px; }
+  .t-card { padding: 24px 20px 20px; border-radius: 14px; }
+  .t-quote { font-size: 16px; font-weight: 600; color: var(--forest); }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══ NEWS TICKER ═══ -->
+<div class="news-ticker" id="newsTicker">
+  <div class="news-ticker-label">LIVE</div>
+  <div class="news-ticker-track" id="tickerTrack">
+    <span class="news-ticker-item">UK mortgage rates stabilise as inflation eases</span>
+    <span class="news-ticker-item">Life insurance premiums rise due to increasing health risks</span>
+    <span class="news-ticker-item">First-time buyers benefit from new government scheme</span>
+    <span class="news-ticker-item">Bank of England holds interest rates steady</span>
+    <span class="news-ticker-item">Property market shows resilience amid economic uncertainty</span>
+    <span class="news-ticker-item">UK mortgage rates stabilise as inflation eases</span>
+    <span class="news-ticker-item">Life insurance premiums rise due to increasing health risks</span>
+    <span class="news-ticker-item">First-time buyers benefit from new government scheme</span>
+    <span class="news-ticker-item">Bank of England holds interest rates steady</span>
+    <span class="news-ticker-item">Property market shows resilience amid economic uncertainty</span>
+  </div>
+</div>
+
+<!-- ═══ MODAL ═══ -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal">
+    <button class="modal-close" id="modalClose">
+      <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+    <div id="formContent">
+      <p class="modal-eyebrow">Free · No obligation</p>
+      <h2 class="modal-title">Become a Client</h2>
+      <p class="modal-sub">Tell us a little about yourself and one of our advisers will be in touch within 24 hours.</p>
+      <div class="form-group">
+        <label class="form-label" for="f-name">Full Name</label>
+        <input class="form-input" type="text" id="f-name" placeholder="e.g. James Wilson" autocomplete="name"/>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="f-email">Email Address</label>
+        <input class="form-input" type="email" id="f-email" placeholder="you@example.com" autocomplete="email"/>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="f-phone">Phone Number</label>
+        <input class="form-input" type="tel" id="f-phone" placeholder="+44 7700 900000" autocomplete="tel"/>
+      </div>
+      <p class="interest-label">I'm interested in</p>
+      <div class="interest-grid">
+        <div class="interest-opt">
+          <input type="checkbox" id="i-mortgage" value="Mortgages"/>
+          <label for="i-mortgage">🏠 Mortgages</label>
+        </div>
+        <div class="interest-opt">
+          <input type="checkbox" id="i-life" value="Life Insurance"/>
+          <label for="i-life">🛡 Life Insurance</label>
+        </div>
+        <div class="interest-opt">
+          <input type="checkbox" id="i-income" value="Income Protection"/>
+          <label for="i-income">💼 Income Protection</label>
+        </div>
+        <div class="interest-opt">
+          <input type="checkbox" id="i-estate" value="Estate Planning"/>
+          <label for="i-estate">📋 Estate Planning</label>
+        </div>
+      </div>
+      <button class="btn-submit" id="formSubmit">Request a Callback</button>
+      <p class="form-note">By submitting you agree to our Privacy Policy. We'll never share your details.</p>
+    </div>
+    <div class="form-success" id="formSuccess">
+      <div class="form-success-icon">
+        <svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+      </div>
+      <h3>You're all set.</h3>
+      <p>Thanks for getting in touch. One of our advisers will contact you within 24 hours to arrange a free, no-obligation call.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ─── HEADER ─── -->
+<header id="siteHeader">
+  <a class="logo" href="#" onclick="event.preventDefault();showPage('home');">
+    <span class="logo-mark">S</span>
+    Secure Mortgages & Protection
+  </a>
+  <nav>
+    <a href="#" class="nav-home-link" onclick="event.preventDefault();showPage('home');">Home</a>
+    <div class="nav-dropdown">
+      <a href="#services">
+        Services
+        <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+      </a>
+      <div class="dropdown-menu">
+        <a href="mortgages.html" class="dropdown-item">
+          <div class="dropdown-item-icon">
+            <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          </div>
+          <div class="dropdown-item-text">
+            <span class="dropdown-item-label">Mortgages</span>
+            <span class="dropdown-item-sub">First-time, remortgage, buy-to-let</span>
+          </div>
+        </a>
+        <a href="life-insurance.html" class="dropdown-item">
+          <div class="dropdown-item-icon">
+            <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <div class="dropdown-item-text">
+            <span class="dropdown-item-label">Life Insurance</span>
+            <span class="dropdown-item-sub">Term, whole of life, joint cover</span>
+          </div>
+        </a>
+        <a href="income-protection.html" class="dropdown-item">
+          <div class="dropdown-item-icon">
+            <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+          </div>
+          <div class="dropdown-item-text">
+            <span class="dropdown-item-label">Income Protection</span>
+            <span class="dropdown-item-sub">Protect your income if you can't work</span>
+          </div>
+        </a>
+        <a href="estate-planning.html" class="dropdown-item">
+          <div class="dropdown-item-icon">
+            <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          </div>
+          <div class="dropdown-item-text">
+            <span class="dropdown-item-label">Estate Planning</span>
+            <span class="dropdown-item-sub">Wills, trusts & IHT planning</span>
+          </div>
+        </a>
+      </div>
+    </div>
+    <a href="#why" class="nav-section-link" data-section="why">Why SMP</a>
+    <a href="#faq" class="nav-section-link" data-section="faq">FAQ</a>
+    <a href="#contact" class="nav-cta">Become a Client</a>
+  </nav>
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span>
+  </button>
+</header>
+
+<!-- ─── FLOATING CTA (global — visible on every page) ─── -->
+<div class="floating-cta" id="floatingCta">
+  <div class="floating-cta-inner">
+    <span class="floating-cta-dot"></span>
+    <span class="floating-cta-text">Advisers available now</span>
+    <span class="floating-cta-pill">Book a free call →</span>
+  </div>
+</div>
+
+<div class="page active" id="page-home">
+
+<!-- ─── HERO ─── -->
+<section class="hero">
+  <div class="hero-left">
+    <p class="hero-eyebrow">FCA Regulated · Est. 2008</p>
+    <h1 class="hero-h1">Expert advice.<br/><em>National reach.</em><br/>Lasting wealth.</h1>
+    <p class="hero-sub">Tailored mortgage and life protection advice for families protecting and growing their UK assets.</p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn-primary">
+        Become a Client
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+      <a href="#services" class="btn-ghost">
+        Explore services
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M19 9l-7 7-7-7"/></svg>
+      </a>
+    </div>
+  </div>
+  <div class="hero-divider"></div>
+  <div class="hero-right">
+    <div class="hero-deco-number">22</div>
+    <div class="hero-stats">
+      <p class="hero-stats-label">By the numbers</p>
+      <div class="stats-grid">
+        <div class="stat-cell" data-val="800">
+          <div class="stat-number">800+</div>
+          <div class="stat-label">Clients advised</div>
+        </div>
+        <div class="stat-cell" data-val="90">
+          <div class="stat-number">90+</div>
+          <div class="stat-label">Lenders accessed</div>
+        </div>
+        <div class="stat-cell" data-val="40">
+          <div class="stat-number">40+</div>
+          <div class="stat-label">Years' experience</div>
+        </div>
+        <div class="stat-cell" data-val="100">
+          <div class="stat-number">100%</div>
+          <div class="stat-label">Qualified advisers</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── TRUSTED BY ─── -->
+<section class="trusted-by-strip" style="background:var(--cream);padding:32px 60px;border-bottom:1px solid var(--mist);">
+  <div style="max-width:1100px;margin:0 auto;">
+    <p style="font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);margin-bottom:24px;font-family:var(--sans);text-align:center;">Trusted by clients from</p>
+    <div class="trusted-by-row" style="display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--mist);border-radius:6px;overflow:hidden;background:transparent;">
+
+      <!-- Barclays -->
+      <div style="display:flex;align-items:center;justify-content:center;padding:24px 16px;border-right:1px solid var(--mist);">
+        <svg viewBox="0 0 120 32" style="height:26px;width:auto;" xmlns="http://www.w3.org/2000/svg">
+          <text x="0" y="24" font-family="Arial,sans-serif" font-weight="700" font-size="22" fill="#00AEEF" letter-spacing="-0.5">Barclays</text>
+        </svg>
+      </div>
+
+      <!-- HSBC -->
+      <div style="display:flex;align-items:center;justify-content:center;padding:24px 16px;border-right:1px solid var(--mist);">
+        <svg viewBox="0 0 80 32" style="height:26px;width:auto;" xmlns="http://www.w3.org/2000/svg">
+          <text x="0" y="24" font-family="Arial,sans-serif" font-weight="700" font-size="22" fill="#DB0011" letter-spacing="1">HSBC</text>
+        </svg>
+      </div>
+
+      <!-- Nationwide -->
+      <div style="display:flex;align-items:center;justify-content:center;padding:24px 16px;border-right:1px solid var(--mist);">
+        <svg viewBox="0 0 160 32" style="height:26px;width:auto;" xmlns="http://www.w3.org/2000/svg">
+          <rect x="0" y="4" width="20" height="20" rx="2" fill="#003DA5"/>
+          <text x="28" y="24" font-family="Arial,sans-serif" font-weight="700" font-size="18" fill="#003DA5">Nationwide</text>
+        </svg>
+      </div>
+
+      <!-- NatWest -->
+      <div style="display:flex;align-items:center;justify-content:center;padding:24px 16px;">
+        <svg viewBox="0 0 130 32" style="height:26px;width:auto;" xmlns="http://www.w3.org/2000/svg">
+          <polygon points="0,16 8,9 16,16 8,23" fill="#6C1F7D"/>
+          <polygon points="8,9 16,2 24,9 16,16" fill="#6C1F7D" opacity="0.65"/>
+          <polygon points="16,16 24,9 32,16 24,23" fill="#6C1F7D" opacity="0.82"/>
+          <text x="38" y="24" font-family="Arial,sans-serif" font-weight="700" font-size="18" fill="#6C1F7D">NatWest</text>
+        </svg>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ─── MARQUEE ─── -->
+<div class="marquee-section">
+  <div class="marquee-track">
+    <span class="marquee-item">Mortgages <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Life Insurance <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Estate Planning <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Income Protection <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Critical Illness <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Business Protection <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Wills & Trusts <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Mortgages <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Life Insurance <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Estate Planning <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Income Protection <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Critical Illness <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Business Protection <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Wills & Trusts <span class="marquee-dot"></span></span>
+  </div>
+</div>
+
+<!-- ─── SERVICES ─── -->
+<div class="services-section" id="services">
+  <div class="services-layout">
+    <div class="services-sticky">
+      <div class="reveal">
+        <span class="tag">Our Services</span>
+        <h2 class="h2">Everything you need to <em>protect</em> what matters.</h2>
+        <p class="services-intro">Independent, whole-of-market advice across mortgages, protection, and estate planning. No bias. No hidden agendas. Just expert guidance built around you.</p>
+        <a href="#contact" class="btn-primary">Start your review</a>
+      </div>
+    </div>
+    <div class="services-list reveal delay-2">
+      <div class="service-item active">
+        <span class="service-num">01</span>
+        <div class="service-content">
+          <h3>Mortgages</h3>
+          <p>First-time buyer, remortgage, buy-to-let, and complex income — we search the whole market to find you the right deal.</p>
+        </div>
+        <span class="service-arrow">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </span>
+      </div>
+      <div class="service-item">
+        <span class="service-num">02</span>
+        <div class="service-content">
+          <h3>Life Insurance</h3>
+          <p>Comprehensive life cover tailored to your family's needs — term, whole of life, and joint policies arranged from across the market.</p>
+        </div>
+        <span class="service-arrow">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </span>
+      </div>
+      <div class="service-item">
+        <span class="service-num">03</span>
+        <div class="service-content">
+          <h3>Critical Illness Cover</h3>
+          <p>A lump sum paid if you're diagnosed with a serious illness — so you can focus on recovery, not finances.</p>
+        </div>
+        <span class="service-arrow">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </span>
+      </div>
+      <div class="service-item">
+        <span class="service-num">04</span>
+        <div class="service-content">
+          <h3>Income Protection</h3>
+          <p>Replace your income if illness or injury stops you working — maintaining your lifestyle when you need it most.</p>
+        </div>
+        <span class="service-arrow">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </span>
+      </div>
+      <div class="service-item">
+        <span class="service-num">05</span>
+        <div class="service-content">
+          <h3>Estate Planning & Wills</h3>
+          <p>Ensure your assets pass to the right people, efficiently and without unnecessary tax — backed by expert legal and financial guidance.</p>
+        </div>
+        <span class="service-arrow">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── WHY SMP ─── -->
+<section class="why-section" id="why">
+  <div class="why-layout">
+    <div class="why-header">
+      <div class="reveal">
+        <span class="tag" style="color: var(--gold-light);">Why SMP</span>
+        <h2 class="why-h2">Independent advice<br/>in your <em>best interests.</em></h2>
+      </div>
+      <p class="why-intro reveal delay-1">We don't work for insurance companies or banks. We work for you — which means every recommendation we make is driven solely by what's right for your situation.</p>
+    </div>
+    <div class="why-grid">
+      <div class="why-card reveal">
+        <div class="why-card-num">01</div>
+        <h3>Whole-of-Market Access</h3>
+        <p>We compare products from across the entire market — not just a limited panel — ensuring you always get the most competitive deal available.</p>
+      </div>
+      <div class="why-card reveal delay-1">
+        <div class="why-card-num">02</div>
+        <h3>FCA Regulated</h3>
+        <p>Authorised and regulated by the Financial Conduct Authority (FCA No. 912820). Your advice, your money, and your data are fully protected.</p>
+      </div>
+      <div class="why-card reveal delay-2">
+        <div class="why-card-num">03</div>
+        <h3>Dedicated Adviser</h3>
+        <p>One adviser, one relationship. You'll have a named expert who knows your situation and is available when you need them.</p>
+      </div>
+      <div class="why-card reveal delay-2">
+        <div class="why-card-num">05</div>
+        <h3>Fee-Free Service</h3>
+        <p>Our advice is free to you. We receive commission from providers, which is always disclosed upfront — full transparency, no surprises.</p>
+      </div>
+      <div class="why-card reveal delay-3">
+        <div class="why-card-num">06</div>
+        <h3>Ongoing Support</h3>
+        <p>Your financial needs evolve. We review your cover annually and proactively get in touch when your circumstances or market conditions change.</p>
+      </div>
+      <div class="why-card reveal delay-1">
+        <div class="why-card-num">07</div>
+        <h3>Thousands Helped</h3>
+        <p>We've helped thousands of families across the UK secure the right mortgage and life protection — and we're just getting started.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── PROCESS ─── -->
+<section class="process-section" id="process">
+  <div class="process-layout">
+    <div class="process-header">
+      <div class="reveal">
+        <span class="tag">How It Works</span>
+        <h2 class="h2">Three steps to <em>total clarity.</em></h2>
+      </div>
+      <p class="reveal delay-1" style="font-size:15px;font-weight:300;line-height:1.8;color:var(--muted);padding-top:8px;">Most people put off getting proper financial advice because it feels complicated. We've made it simple. Three conversations and you'll have a plan you actually understand.</p>
+    </div>
+    <div class="process-steps">
+      <div class="process-step reveal">
+        <div class="step-icon">
+          <span class="step-num">1</span>
+          <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        </div>
+        <h3>Tell us about yourself</h3>
+        <p>A relaxed 30-minute call with a dedicated adviser. No jargon. We listen first — to your goals, your worries, your situation — before we say anything.</p>
+      </div>
+      <div class="process-step reveal delay-2">
+        <div class="step-icon">
+          <span class="step-num">2</span>
+          <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+        </div>
+        <h3>Get your bespoke plan</h3>
+        <p>We research the whole market and come back with a clear recommendation — the right products, the right level of cover, and the right price for you.</p>
+      </div>
+      <div class="process-step reveal delay-3">
+        <div class="step-icon">
+          <span class="step-num">3</span>
+          <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <h3>Protect your future</h3>
+        <p>Once you're happy, we handle everything — applications, paperwork, and providers. Then we check in every year to make sure your plan still fits your life.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── TESTIMONIALS (Stacking Cards) ─── -->
+
+<section class="clients-section">
+  <div class="clients-inner">
+
+    <!-- Left sticky -->
+    <div class="clients-left reveal">
+      <span class="clients-tag">
+        <span class="clients-tag-dot"></span>
+        Happy Clients
+      </span>
+      <h2 class="clients-h2">Clients who trust us to <em>protect</em> what matters.</h2>
+      <p class="clients-desc">Trusted by thousands of clients nationwide — from first-time buyers to growing families across the UK.</p>
+      <div class="clients-stats">
+        <div class="clients-stat">
+          <div class="clients-stat-val">800+</div>
+          <div class="clients-stat-label">Clients advised</div>
+        </div>
+        <div class="clients-stat">
+          <div class="clients-stat-val">90+</div>
+          <div class="clients-stat-label">Lenders accessed</div>
+        </div>
+        <div class="clients-stat">
+          <div class="clients-stat-val">40+</div>
+          <div class="clients-stat-label">Years' experience</div>
+        </div>
+      </div>
+      <div class="clients-actions">
+        <a href="#contact" class="btn-clients-primary">Become a Client</a>
+        <a href="#faq" class="btn-clients-outline">See all reviews</a>
+      </div>
+    </div>
+
+    <!-- Right: stacking cards -->
+    <div class="clients-right reveal delay-2">
+      <div class="t-card">
+        <div class="t-card-top">
+          <div class="t-avatar" style="background:var(--forest);display:flex;align-items:center;justify-content:center;color:var(--gold);font-family:var(--serif);font-size:18px;font-weight:400;">BP</div>
+          <div>
+            <div class="t-name">Bhavesh Patel</div>
+            <div class="t-role">Life Insurance · New Parent</div>
+          </div>
+        </div>
+        <div class="t-rating">
+          <span class="t-rating-num">5.0</span>
+          <div class="t-stars">
+            <span class="t-star">★</span><span class="t-star">★</span><span class="t-star">★</span><span class="t-star">★</span><span class="t-star">★</span>
+          </div>
+        </div>
+        <p class="t-quote">"Everything was explained in plain English with no pressure at all. With a newborn on the way, they helped us understand exactly what cover we needed. We feel so much more at ease now."</p>
+      </div>
+
+      <div class="t-card">
+        <div class="t-card-top">
+          <div class="t-avatar" style="background:var(--forest);display:flex;align-items:center;justify-content:center;color:var(--gold);font-family:var(--serif);font-size:18px;font-weight:400;">AD</div>
+          <div>
+            <div class="t-name">Anthony D.</div>
+            <div class="t-role">Protection Client</div>
+          </div>
+        </div>
+        <div class="t-rating">
+          <span class="t-rating-num">5.0</span>
+          <div class="t-stars">
+            <span class="t-star">★</span><span class="t-star">★</span><span class="t-star">★</span><span class="t-star">★</span><span class="t-star">★</span>
+          </div>
+        </div>
+        <p class="t-quote">"Supportive and responsive throughout. I felt well-informed at every stage and confident I was putting the right protection in place for my future. Would definitely recommend."</p>
+      </div>
+
+      <div class="t-card">
+        <div class="t-card-top">
+          <div class="t-avatar" style="background:var(--forest);display:flex;align-items:center;justify-content:center;color:var(--gold);font-family:var(--serif);font-size:18px;font-weight:400;">KA</div>
+          <div>
+            <div class="t-name">Kiara Alles-Shah</div>
+            <div class="t-role">Business Owner</div>
+          </div>
+        </div>
+        <div class="t-rating">
+          <span class="t-rating-num">5.0</span>
+          <div class="t-stars">
+            <span class="t-star">★</span><span class="t-star">★</span><span class="t-star">★</span><span class="t-star">★</span><span class="t-star">★</span>
+          </div>
+        </div>
+        <p class="t-quote">"As a new business owner, SMP made my first year simple. It felt collaborative — I could ask anything at any time. Gave me real confidence planning for myself, my business, and my family."</p>
+      </div>
+
+      <div class="t-card">
+        <div class="t-card-top">
+          <div class="t-avatar" style="background:var(--forest);display:flex;align-items:center;justify-content:center;color:var(--gold);font-family:var(--serif);font-size:18px;font-weight:400;">SC</div>
+          <div>
+            <div class="t-name">SMP Client</div>
+            <div class="t-role">Protection Client</div>
+          </div>
+        </div>
+        <div class="t-rating">
+          <span class="t-rating-num">5.0</span>
+          <div class="t-stars">
+            <span class="t-star">★</span><span class="t-star">★</span><span class="t-star">★</span><span class="t-star">★</span><span class="t-star">★</span>
+          </div>
+        </div>
+        <p class="t-quote">"Professional but approachable from the very first conversation. Never felt rushed or pushed into anything — gave me real confidence I was making the right decision for my family."</p>
+      </div>
+
+      <div class="t-card">
+        <div class="t-card-top">
+          <div class="t-avatar" style="background:var(--forest);display:flex;align-items:center;justify-content:center;color:var(--gold);font-family:var(--serif);font-size:18px;font-weight:400;">SC</div>
+          <div>
+            <div class="t-name">SMP Client</div>
+            <div class="t-role">Protection Client</div>
+          </div>
+        </div>
+        <div class="t-rating">
+          <span class="t-rating-num">5.0</span>
+          <div class="t-stars">
+            <span class="t-star">★</span><span class="t-star">★</span><span class="t-star">★</span><span class="t-star">★</span><span class="t-star">★</span>
+          </div>
+        </div>
+        <p class="t-quote">"Patient, responsive, and no question ever felt silly. Everything was explained clearly and honestly — made the whole process smooth and completely stress-free."</p>
+      </div>
+
+      <div class="t-card">
+        <div class="t-card-top">
+          <div class="t-avatar" style="background:var(--forest);display:flex;align-items:center;justify-content:center;color:var(--gold);font-family:var(--serif);font-size:18px;font-weight:400;">SC</div>
+          <div>
+            <div class="t-name">SMP Client</div>
+            <div class="t-role">Mortgage &amp; Protection</div>
+          </div>
+        </div>
+        <div class="t-rating">
+          <span class="t-rating-num">5.0</span>
+          <div class="t-stars">
+            <span class="t-star">★</span><span class="t-star">★</span><span class="t-star">★</span><span class="t-star">★</span><span class="t-star">★</span>
+          </div>
+        </div>
+        <p class="t-quote">"Made what I thought would be a stressful process feel straightforward and manageable. Communication was excellent throughout — I always felt supported."</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ─── FAQ ─── -->
+<section class="faq-section" id="faq">
+  <div class="faq-layout">
+    <div class="faq-sticky reveal">
+      <span class="tag">FAQ</span>
+      <h2 class="h2" style="font-size:clamp(36px,3.5vw,52px);">Your questions, <em>answered.</em></h2>
+      <p style="font-size:14px;font-weight:300;line-height:1.8;color:var(--muted);margin-top:24px;margin-bottom:40px;">Can't find what you're looking for? We're always happy to help — reach out directly and we'll come back to you within 24 hours.</p>
+      <a href="#contact" class="btn-primary">Contact us</a>
+    </div>
+    <div class="faq-list reveal delay-2">
+      <div class="faq-item open">
+        <div class="faq-q">
+          <span class="faq-q-text">What services does SMP offer?</span>
+          <span class="faq-toggle">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </span>
+        </div>
+        <div class="faq-a">We offer mortgages, life insurance, critical illness and income protection, estate planning, wills, and business protection — all arranged on a whole-of-market basis.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">
+          <span class="faq-q-text">Is your service free?</span>
+          <span class="faq-toggle">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </span>
+        </div>
+        <div class="faq-a">Yes. Our advice is free to you. We receive commission from the product providers we recommend — always disclosed clearly and upfront before you commit to anything.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">
+          <span class="faq-q-text">Are you regulated by the FCA?</span>
+          <span class="faq-toggle">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </span>
+        </div>
+        <div class="faq-a">Yes. Secure Mortgages & Protection is authorised and regulated by the Financial Conduct Authority (FCA reference 912820). This means your advice and any products arranged are fully protected.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">
+          <span class="faq-q-text">Can you help if I'm self-employed or have a complex income?</span>
+          <span class="faq-toggle">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </span>
+        </div>
+        <div class="faq-a">Yes — this is something we specialise in. Whether you're a sole trader, contractor, or company director, we work with lenders who understand non-standard income and can find competitive rates that high-street banks often can't offer.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">
+          <span class="faq-q-text">How do I get started?</span>
+          <span class="faq-toggle">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </span>
+        </div>
+        <div class="faq-a">Click "Become a Client" and complete a short enquiry. We'll match you with a qualified adviser within 24 hours and arrange a call at a time that suits you — no obligation, no pressure.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── CTA ─── -->
+<section class="cta-section" id="contact">
+  <div class="cta-layout">
+    <div class="reveal">
+      <span class="tag" style="color:var(--gold-light);">Get Started</span>
+      <h2 class="cta-h2">Start building your <em>future</em> today.</h2>
+      <p class="cta-sub">A 30-minute call could be the most valuable financial conversation you ever have. No jargon, no obligation — just honest, expert advice built around your life.</p>
+      <div class="cta-btn-row">
+        <a href="#" class="btn-cream">
+          Book a free call
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <a href="tel:+441234567890" class="btn-outline">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2A19.79 19.79 0 0 1 11.76 19a19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          Call us
+        </a>
+      </div>
+    </div>
+    <div class="cta-trust reveal delay-2">
+      <div class="trust-item">
+        <div class="trust-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <div>
+          <div class="trust-title">FCA Regulated</div>
+          <div class="trust-desc">Authorised by the Financial Conduct Authority · Ref. 912820</div>
+        </div>
+      </div>
+      <div class="trust-item">
+        <div class="trust-icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9 12l2 2 4-4"/></svg>
+        </div>
+        <div>
+          <div class="trust-title">Whole-of-Market Advice</div>
+          <div class="trust-desc">We compare every provider — not a restricted panel — to find your best option.</div>
+        </div>
+      </div>
+      <div class="trust-item">
+        <div class="trust-icon">
+          <svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        </div>
+        <div>
+          <div class="trust-title">Your Data is Safe</div>
+          <div class="trust-desc">Fully GDPR compliant. Your information is never sold or shared without consent.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FOOTER ─── -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a class="footer-logo" href="/">Secure Mortgages & Protection</a>
+        <p>Expert mortgage and protection advice for families and professionals across the UK.</p>
+        <p style="margin-top:12px;">Authorised and regulated by the Financial Conduct Authority · FCA No. 912820</p>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <a href="#">Life Insurance</a>
+        <a href="#">Mortgages</a>
+        <a href="#">Critical Illness</a>
+        <a href="#">Income Protection</a>
+        <a href="#">Estate Planning</a>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="#">About SMP</a>
+        <a href="#">Our Team</a>
+        <a href="#">Careers</a>
+        <a href="#">Contact</a>
+      </div>
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+        <a href="#">Cookie Policy</a>
+        <a href="#">Client Portal</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© Secure Mortgages & Protection 2026. All rights reserved.</span>
+      <span>Your home may be repossessed if you do not keep up repayments on your mortgage.</span>
+    </div>
+  </div>
+</footer>
+
+</div><!-- end page-home -->
+
+<!-- ═══ MOBILE MENU (global — outside all pages) ═══ -->
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-menu-close" id="mobileMenuClose">
+    <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+  </button>
+  <a href="#" class="mobile-menu-link" data-mobile-link data-page="home">Home</a>
+  <div class="mobile-menu-divider"></div>
+  <a href="mortgages.html" class="mobile-menu-link" data-mobile-link>Mortgages</a>
+  <a href="life-insurance.html" class="mobile-menu-link" data-mobile-link>Life Insurance</a>
+  <a href="income-protection.html" class="mobile-menu-link" data-mobile-link>Income Protection</a>
+  <a href="estate-planning.html" class="mobile-menu-link" data-mobile-link>Estate Planning</a>
+  <div class="mobile-menu-divider"></div>
+  <a href="#why" class="mobile-menu-link" data-mobile-link data-section="why">Why SMP</a>
+  <a href="#faq" class="mobile-menu-link" data-mobile-link data-section="faq">FAQ</a>
+  <div class="mobile-menu-divider"></div>
+  <a href="#contact" class="mobile-menu-cta-btn" id="mobileCtaBtn" data-mobile-link>Become a Client</a>
+</div>
+
+<div class="page" id="page-mortgages">
+<section class="svc-hero">
+  <div class="hero-deco">£</div>
+  <div class="svc-hero-inner">
+    <p class="svc-hero-eyebrow">Mortgage Advice · FCA Regulated</p>
+    <h1>The right mortgage.<br/><em>First time,</em><br/>every time.</h1>
+    <p class="svc-hero-sub">Whole-of-market mortgage advice tailored to your situation — whether you're buying your first home, remortgaging, or investing in property.</p>
+    <div class="svc-hero-actions">
+      <button class="btn-primary open-modal">Get Free Advice <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
+      <button class="back-link" onclick="showPage('home')"><svg viewBox="0 0 24 24"><polyline points="19 12 5 12"/><polyline points="12 19 5 12 12 5"/></svg> Back to Home</button>
+    </div>
+    <div class="svc-hero-trust">
+      <div class="svc-hero-trust-item"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg><span>FCA Regulated</span></div>
+      <div class="svc-hero-trust-item"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9 12l2 2 4-4"/></svg><span>Whole of Market</span></div>
+      <div class="svc-hero-trust-item"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg><span>Fee-Free Advice</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="types-section">
+  <div class="types-layout">
+    <div class="reveal">
+      <span class="section-tag">What We Cover</span>
+      <h2 class="section-h2">Every type of<br/><em>mortgage,</em> handled.</h2>
+      <p class="section-intro">Whatever your situation, we search the whole market to find the most competitive rate and the right deal for you.</p>
+    </div>
+    <div class="types-grid">
+      <div class="type-card reveal delay-1"><div class="type-card-num">01</div><h3>First-Time Buyer</h3><p>Buying your first home is one of the biggest decisions of your life. We guide you through every step — from Agreement in Principle to completion.</p><span class="type-card-tag">Most popular</span></div>
+      <div class="type-card reveal delay-2"><div class="type-card-num">02</div><h3>Remortgage</h3><p>Coming to the end of your fixed rate? We'll search the market to find you a better deal before you roll onto your lender's standard variable rate.</p><span class="type-card-tag">Save money now</span></div>
+      <div class="type-card reveal delay-1"><div class="type-card-num">03</div><h3>Buy-to-Let</h3><p>Whether you're building a portfolio or buying your first investment property, we find buy-to-let mortgages tailored to your rental income and goals.</p><span class="type-card-tag">For investors</span></div>
+      <div class="type-card reveal delay-2"><div class="type-card-num">04</div><h3>Self-Employed</h3><p>Complex income doesn't mean a complicated process. We work with lenders who understand self-employed applicants — sole traders and directors welcome.</p><span class="type-card-tag">Specialist advice</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="svc-process-section">
+  <div class="svc-process-layout">
+    <div class="svc-process-header reveal">
+      <span class="section-tag" style="color:var(--gold-light);">How It Works</span>
+      <h2 class="section-h2" style="color:var(--cream);">Three steps to your<br/><em>perfect mortgage.</em></h2>
+    </div>
+    <div class="svc-process-steps">
+      <div class="svc-process-step reveal delay-1"><div class="svc-step-icon"><span class="svc-step-num">1</span><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div><h3>Free Consultation</h3><p>Tell us about your situation, income, and what you're looking for. No jargon, no pressure — just an honest conversation about your options.</p></div>
+      <div class="svc-process-step reveal delay-2"><div class="svc-step-icon"><span class="svc-step-num">2</span><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div><h3>We Search the Market</h3><p>Your adviser searches thousands of mortgage products across the whole market to find the most competitive rate for your circumstances.</p></div>
+      <div class="svc-process-step reveal delay-3"><div class="svc-step-icon"><span class="svc-step-num">3</span><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div><h3>You Get the Keys</h3><p>We handle the paperwork, liaise with lenders, and keep you updated at every stage. You focus on the exciting part — we handle the rest.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="svc-why-section">
+  <div class="svc-why-layout">
+    <div class="reveal"><span class="section-tag">Why Choose Us</span><h2 class="section-h2">Why families choose<br/><em>SMP</em> for their mortgage.</h2></div>
+    <div class="svc-why-grid">
+      <div class="svc-why-card reveal delay-1"><div class="svc-why-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/></svg></div><h3>Whole of Market</h3><p>We're not tied to a panel of lenders. We search every available mortgage product to find the right fit for your situation.</p></div>
+      <div class="svc-why-card reveal delay-2"><div class="svc-why-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><h3>FCA Regulated</h3><p>Fully authorised and regulated by the Financial Conduct Authority. Your advice and your data are fully protected.</p></div>
+      <div class="svc-why-card reveal delay-1"><div class="svc-why-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div><h3>Completely Fee-Free</h3><p>Our mortgage advice is free to you. We receive commission from the lender once your mortgage completes — always disclosed upfront.</p></div>
+      <div class="svc-why-card reveal delay-2"><div class="svc-why-icon"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div><h3>One Dedicated Adviser</h3><p>You deal with one person from start to finish. No call centres, no being passed around — consistent, expert advice.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="svc-review-section">
+  <div class="svc-review-inner reveal">
+    <p class="svc-review-label">Client Review</p>
+    <div class="svc-review-card">
+      <div class="svc-review-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+      <p class="svc-review-quote">"As a new business owner, SMP made my first year simple. It felt collaborative — I could ask anything at any time. Gave me real confidence planning for myself, my business, and my family."</p>
+      <div class="svc-review-author">
+        <div class="svc-review-avatar">KA</div>
+        <div style="text-align:left;">
+          <div class="svc-review-name">Kiara Alles-Shah</div>
+          <div class="svc-review-role">Business Owner · Mortgage Client</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="svc-cta-section">
+  <div class="svc-cta-inner reveal">
+    <span class="section-tag" style="color:var(--gold-light);justify-content:center;">Ready to Start</span>
+    <h2 class="svc-cta-h2">Find your<br/><em>perfect mortgage</em><br/>today.</h2>
+    <p class="svc-cta-sub">Speak with a dedicated adviser — free, no obligation, and no jargon.</p>
+    <div class="svc-cta-actions">
+      <button class="btn-primary open-modal">Get Free Mortgage Advice</button>
+      <button class="btn-outline-cream" onclick="showPage('home')">← Back to Home</button>
+    </div>
+    <div class="svc-cta-trust">
+      <div class="svc-cta-trust-item"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>FCA Regulated</div>
+      <div class="svc-cta-trust-item"><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Fee-free advice</div>
+      <div class="svc-cta-trust-item"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Dedicated adviser</div>
+    </div>
+  </div>
+</section>
+</div>
+<div class="page" id="page-life-insurance">
+<section class="svc-hero">
+  <div class="hero-deco">LI</div>
+  <div class="svc-hero-inner">
+    <p class="svc-hero-eyebrow">Life Insurance · FCA Regulated</p>
+    <h1>Protect your family.<br/><em>Whatever</em><br/>happens.</h1>
+    <p class="svc-hero-sub">Comprehensive life insurance tailored to your family's needs — so the people who matter most are always looked after, no matter what.</p>
+    <div class="svc-hero-actions">
+      <button class="btn-primary open-modal">Get Free Advice <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
+      <button class="back-link" onclick="showPage('home')"><svg viewBox="0 0 24 24"><polyline points="19 12 5 12"/><polyline points="12 19 5 12 12 5"/></svg> Back to Home</button>
+    </div>
+    <div class="svc-hero-trust">
+      <div class="svc-hero-trust-item"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg><span>FCA Regulated</span></div>
+      <div class="svc-hero-trust-item"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9 12l2 2 4-4"/></svg><span>Whole of Market</span></div>
+      <div class="svc-hero-trust-item"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg><span>Fee-Free Advice</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="types-section">
+  <div class="types-layout">
+    <div class="reveal">
+      <span class="section-tag">Types of Cover</span>
+      <h2 class="section-h2">The right cover<br/>for your <em>situation.</em></h2>
+      <p class="section-intro">Every family is different. We find the right type of life insurance based on your circumstances, budget, and what you want to protect.</p>
+    </div>
+    <div class="types-grid">
+      <div class="type-card reveal delay-1"><div class="type-card-num">01</div><h3>Term Life Insurance</h3><p>Pays out a lump sum if you die within a set period — typically 10 to 40 years. The most straightforward and affordable way to protect your family's financial future.</p><span class="type-card-tag">Most popular</span></div>
+      <div class="type-card reveal delay-2"><div class="type-card-num">02</div><h3>Whole of Life Cover</h3><p>Guaranteed to pay out whenever you die — not just within a fixed term. Ideal for estate planning and ensuring your loved ones always receive a payment.</p><span class="type-card-tag">For legacy planning</span></div>
+      <div class="type-card reveal delay-1"><div class="type-card-num">03</div><h3>Critical Illness Cover</h3><p>Pays a lump sum if you're diagnosed with a serious illness — giving you financial breathing room when you need it most.</p><span class="type-card-tag">Peace of mind</span></div>
+      <div class="type-card reveal delay-2"><div class="type-card-num">04</div><h3>Joint Life Insurance</h3><p>A single policy that covers two people — typically partners or spouses. Usually more cost-effective than two separate policies for couples.</p><span class="type-card-tag">For couples</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="svc-process-section">
+  <div class="svc-process-layout">
+    <div class="svc-process-header reveal">
+      <span class="section-tag" style="color:var(--gold-light);">How It Works</span>
+      <h2 class="section-h2" style="color:var(--cream);">Getting covered is<br/><em>simpler than you think.</em></h2>
+    </div>
+    <div class="svc-process-steps">
+      <div class="svc-process-step reveal delay-1"><div class="svc-step-icon"><span class="svc-step-num">1</span><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div><h3>Tell Us About Your Family</h3><p>Share your situation — dependants, income, mortgage, and what you want to protect. Your adviser listens first, recommends second.</p></div>
+      <div class="svc-process-step reveal delay-2"><div class="svc-step-icon"><span class="svc-step-num">2</span><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div><h3>We Find the Right Cover</h3><p>We search the whole market to find the best policy at the most competitive premium for your health and lifestyle.</p></div>
+      <div class="svc-process-step reveal delay-3"><div class="svc-step-icon"><span class="svc-step-num">3</span><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div><h3>Your Family is Protected</h3><p>Once your policy is in place, your family is covered from day one. We review your cover regularly as your life changes.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="svc-why-section">
+  <div class="svc-why-layout">
+    <div class="reveal"><span class="section-tag">Why Choose Us</span><h2 class="section-h2">Why families trust<br/><em>SMP</em> with their protection.</h2></div>
+    <div class="svc-why-grid">
+      <div class="svc-why-card reveal delay-1"><div class="svc-why-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/></svg></div><h3>Whole of Market</h3><p>We compare policies from every insurer — not a restricted panel — so you always get the best cover at the most competitive price.</p></div>
+      <div class="svc-why-card reveal delay-2"><div class="svc-why-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><h3>FCA Regulated</h3><p>Fully authorised and regulated by the Financial Conduct Authority. Your advice and your policy are fully protected.</p></div>
+      <div class="svc-why-card reveal delay-1"><div class="svc-why-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div><h3>Completely Free</h3><p>Our life insurance advice costs you nothing. We receive commission from the insurer — always disclosed clearly before you commit.</p></div>
+      <div class="svc-why-card reveal delay-2"><div class="svc-why-icon"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div><h3>One Dedicated Adviser</h3><p>One person handles your case from start to finish. No call centres, no repeat explanations — consistent, expert advice.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="svc-review-section">
+  <div class="svc-review-inner reveal">
+    <p class="svc-review-label">Client Review</p>
+    <div class="svc-review-card">
+      <div class="svc-review-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+      <p class="svc-review-quote">"Everything was explained in plain English with no pressure at all. With a newborn on the way, they helped us understand exactly what cover we needed. We feel so much more at ease now."</p>
+      <div class="svc-review-author">
+        <div class="svc-review-avatar">BP</div>
+        <div style="text-align:left;">
+          <div class="svc-review-name">Bhavesh Patel</div>
+          <div class="svc-review-role">Life Insurance · New Parent</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="svc-cta-section">
+  <div class="svc-cta-inner reveal">
+    <span class="section-tag" style="color:var(--gold-light);justify-content:center;">Ready to Get Covered</span>
+    <h2 class="svc-cta-h2">Protect your family<br/><em>starting today.</em></h2>
+    <p class="svc-cta-sub">A quick conversation is all it takes. Free, no obligation, no jargon.</p>
+    <div class="svc-cta-actions">
+      <button class="btn-primary open-modal">Get Free Life Insurance Advice</button>
+      <button class="btn-outline-cream" onclick="showPage('home')">← Back to Home</button>
+    </div>
+    <div class="svc-cta-trust">
+      <div class="svc-cta-trust-item"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>FCA Regulated</div>
+      <div class="svc-cta-trust-item"><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Fee-free advice</div>
+      <div class="svc-cta-trust-item"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Dedicated adviser</div>
+    </div>
+  </div>
+</section>
+</div>
+<div class="page" id="page-income-protection">
+<section class="svc-hero">
+  <div class="hero-deco">£</div>
+  <div class="svc-hero-inner">
+    <p class="svc-hero-eyebrow">Income Protection · FCA Regulated</p>
+    <h1>If you can't work,<br/><em>your income</em><br/>shouldn't stop.</h1>
+    <p class="svc-hero-sub">Income protection ensures your lifestyle is maintained if illness or injury stops you working — giving you the financial breathing room to focus on recovery.</p>
+    <div class="svc-hero-actions">
+      <button class="btn-primary open-modal">Get Free Advice <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
+      <button class="back-link" onclick="showPage('home')"><svg viewBox="0 0 24 24"><polyline points="19 12 5 12"/><polyline points="12 19 5 12 12 5"/></svg> Back to Home</button>
+    </div>
+    <div class="svc-hero-trust">
+      <div class="svc-hero-trust-item"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg><span>FCA Regulated</span></div>
+      <div class="svc-hero-trust-item"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9 12l2 2 4-4"/></svg><span>Whole of Market</span></div>
+      <div class="svc-hero-trust-item"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg><span>Fee-Free Advice</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="types-section">
+  <div class="types-layout">
+    <div class="reveal">
+      <span class="section-tag">Types of Cover</span>
+      <h2 class="section-h2">Protection built around<br/>your <em>income and lifestyle.</em></h2>
+      <p class="section-intro">We find the right income protection policy based on your occupation, income, and how long you'd need cover to kick in.</p>
+    </div>
+    <div class="types-grid">
+      <div class="type-card reveal delay-1"><div class="type-card-num">01</div><h3>Short-Term Cover</h3><p>Pays a monthly benefit for a fixed period — typically 1 or 2 years. A cost-effective option if your employer offers some sick pay.</p><span class="type-card-tag">Budget-friendly</span></div>
+      <div class="type-card reveal delay-2"><div class="type-card-num">02</div><h3>Long-Term Cover</h3><p>Continues paying until you return to work or reach retirement age. The most comprehensive form of income protection — ideal if you have dependants or a mortgage.</p><span class="type-card-tag">Most comprehensive</span></div>
+      <div class="type-card reveal delay-1"><div class="type-card-num">03</div><h3>Self-Employed Cover</h3><p>Designed specifically for sole traders and contractors who have no employer sick pay to fall back on. Your income is your business — protect it properly.</p><span class="type-card-tag">For self-employed</span></div>
+      <div class="type-card reveal delay-2"><div class="type-card-num">04</div><h3>Executive Income Protection</h3><p>Set up through your limited company, with premiums paid as a tax-deductible expense. Tax-efficient protection for company directors.</p><span class="type-card-tag">For directors</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="svc-process-section">
+  <div class="svc-process-layout">
+    <div class="svc-process-header reveal">
+      <span class="section-tag" style="color:var(--gold-light);">How It Works</span>
+      <h2 class="section-h2" style="color:var(--cream);">Your income protected<br/><em>in three simple steps.</em></h2>
+    </div>
+    <div class="svc-process-steps">
+      <div class="svc-process-step reveal delay-1"><div class="svc-step-icon"><span class="svc-step-num">1</span><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div><h3>Tell Us About Your Work</h3><p>Share your occupation, income, and employer sick pay. We'll work out exactly how much cover you need and the right deferred period.</p></div>
+      <div class="svc-process-step reveal delay-2"><div class="svc-step-icon"><span class="svc-step-num">2</span><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div><h3>We Search the Market</h3><p>We compare income protection policies from every insurer to find the one that best matches your occupation, health, and budget.</p></div>
+      <div class="svc-process-step reveal delay-3"><div class="svc-step-icon"><span class="svc-step-num">3</span><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div><h3>Your Income is Covered</h3><p>If you're ever unable to work, your policy pays a monthly benefit straight to your bank account — bills, mortgage, and lifestyle all taken care of.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="svc-why-section">
+  <div class="svc-why-layout">
+    <div class="reveal"><span class="section-tag">Why Choose Us</span><h2 class="section-h2">Why people trust<br/><em>SMP</em> with their income.</h2></div>
+    <div class="svc-why-grid">
+      <div class="svc-why-card reveal delay-1"><div class="svc-why-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/></svg></div><h3>Whole of Market</h3><p>We compare from every insurer — not a restricted panel — so you always get the best cover at the most competitive price.</p></div>
+      <div class="svc-why-card reveal delay-2"><div class="svc-why-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><h3>FCA Regulated</h3><p>Fully authorised and regulated by the Financial Conduct Authority. Your advice and your policy are fully protected.</p></div>
+      <div class="svc-why-card reveal delay-1"><div class="svc-why-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div><h3>Completely Free</h3><p>Our income protection advice costs you nothing. Commission from the insurer — always disclosed clearly before you commit.</p></div>
+      <div class="svc-why-card reveal delay-2"><div class="svc-why-icon"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div><h3>One Dedicated Adviser</h3><p>One person handles your case from start to finish. No call centres — consistent, expert advice throughout.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="svc-review-section">
+  <div class="svc-review-inner reveal">
+    <p class="svc-review-label">Client Review</p>
+    <div class="svc-review-card">
+      <div class="svc-review-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+      <p class="svc-review-quote">"Supportive and responsive throughout. I felt well-informed at every stage and confident I was putting the right protection in place for my future. Would definitely recommend."</p>
+      <div class="svc-review-author">
+        <div class="svc-review-avatar">AD</div>
+        <div style="text-align:left;">
+          <div class="svc-review-name">Anthony D.</div>
+          <div class="svc-review-role">Income Protection Client</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="svc-cta-section">
+  <div class="svc-cta-inner reveal">
+    <span class="section-tag" style="color:var(--gold-light);justify-content:center;">Ready to Start</span>
+    <h2 class="svc-cta-h2">Protect your income<br/><em>starting today.</em></h2>
+    <p class="svc-cta-sub">One conversation is all it takes. Free, no obligation, no jargon.</p>
+    <div class="svc-cta-actions">
+      <button class="btn-primary open-modal">Get Free Income Protection Advice</button>
+      <button class="btn-outline-cream" onclick="showPage('home')">← Back to Home</button>
+    </div>
+    <div class="svc-cta-trust">
+      <div class="svc-cta-trust-item"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>FCA Regulated</div>
+      <div class="svc-cta-trust-item"><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Fee-free advice</div>
+      <div class="svc-cta-trust-item"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Dedicated adviser</div>
+    </div>
+  </div>
+</section>
+</div>
+<div class="page" id="page-estate-planning">
+<section class="svc-hero">
+  <div class="hero-deco">W</div>
+  <div class="svc-hero-inner">
+    <p class="svc-hero-eyebrow">Estate Planning · Wills & IHT · FCA Regulated</p>
+    <h1>Protect your wealth.<br/><em>Pass it on</em><br/>your terms.</h1>
+    <p class="svc-hero-sub">Expert estate planning advice to ensure your assets pass to the right people, efficiently — minimising inheritance tax and protecting your family's future.</p>
+    <div class="svc-hero-actions">
+      <button class="btn-primary open-modal">Get Free Advice <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
+      <button class="back-link" onclick="showPage('home')"><svg viewBox="0 0 24 24"><polyline points="19 12 5 12"/><polyline points="12 19 5 12 12 5"/></svg> Back to Home</button>
+    </div>
+    <div class="svc-hero-trust">
+      <div class="svc-hero-trust-item"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg><span>FCA Regulated</span></div>
+      <div class="svc-hero-trust-item"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9 12l2 2 4-4"/></svg><span>Independent Advice</span></div>
+      <div class="svc-hero-trust-item"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg><span>Fee-Free Advice</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="types-section">
+  <div class="types-layout">
+    <div class="reveal">
+      <span class="section-tag">What We Cover</span>
+      <h2 class="section-h2">Protecting your legacy<br/>for <em>generations to come.</em></h2>
+      <p class="section-intro">From writing your will to setting up a trust or planning around inheritance tax — we make sure your estate is handled exactly as you intend.</p>
+    </div>
+    <div class="types-grid">
+      <div class="type-card reveal delay-1"><div class="type-card-num">01</div><h3>Wills</h3><p>A professionally written will ensures your wishes are carried out and your assets go to the right people. Without one, the law decides — not you.</p><span class="type-card-tag">Essential for everyone</span></div>
+      <div class="type-card reveal delay-2"><div class="type-card-num">02</div><h3>Trusts</h3><p>Trusts allow you to ring-fence assets for your beneficiaries while protecting them from unnecessary tax, legal challenges, or mismanagement.</p><span class="type-card-tag">Asset protection</span></div>
+      <div class="type-card reveal delay-1"><div class="type-card-num">03</div><h3>Inheritance Tax Planning</h3><p>With estates over £325,000 subject to 40% IHT, strategic planning can significantly reduce your inheritance tax liability — legally and effectively.</p><span class="type-card-tag">Save up to 40%</span></div>
+      <div class="type-card reveal delay-2"><div class="type-card-num">04</div><h3>Lasting Power of Attorney</h3><p>An LPA ensures someone you trust can manage your finances and health decisions if you're ever unable to do so yourself.</p><span class="type-card-tag">Essential planning</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="svc-process-section">
+  <div class="svc-process-layout">
+    <div class="svc-process-header reveal">
+      <span class="section-tag" style="color:var(--gold-light);">How It Works</span>
+      <h2 class="section-h2" style="color:var(--cream);">Planning your estate<br/><em>made simple.</em></h2>
+    </div>
+    <div class="svc-process-steps">
+      <div class="svc-process-step reveal delay-1"><div class="svc-step-icon"><span class="svc-step-num">1</span><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div><h3>Review Your Estate</h3><p>We start by understanding the full picture — your assets, property, pensions, and wishes. This forms the foundation of your personalised plan.</p></div>
+      <div class="svc-process-step reveal delay-2"><div class="svc-step-icon"><span class="svc-step-num">2</span><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div><h3>We Build Your Plan</h3><p>From writing your will to setting up trusts and IHT strategies — we put the right structures in place to protect your estate and minimise tax.</p></div>
+      <div class="svc-process-step reveal delay-3"><div class="svc-step-icon"><span class="svc-step-num">3</span><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div><h3>Your Legacy is Secured</h3><p>With everything in place, your wishes are protected. We review your plan regularly as your circumstances or legislation changes.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="svc-why-section">
+  <div class="svc-why-layout">
+    <div class="reveal"><span class="section-tag">Why Choose Us</span><h2 class="section-h2">Why families trust<br/><em>SMP</em> with their estate.</h2></div>
+    <div class="svc-why-grid">
+      <div class="svc-why-card reveal delay-1"><div class="svc-why-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/></svg></div><h3>Independent Advice</h3><p>We're not tied to any product provider. Every recommendation is made solely in your interest — no bias, no hidden agendas.</p></div>
+      <div class="svc-why-card reveal delay-2"><div class="svc-why-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><h3>FCA Regulated</h3><p>Fully authorised and regulated by the Financial Conduct Authority. Your advice and your data are fully protected.</p></div>
+      <div class="svc-why-card reveal delay-1"><div class="svc-why-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div><h3>Completely Free</h3><p>Our estate planning advice costs you nothing upfront. We'll always be transparent about any fees before you commit to anything.</p></div>
+      <div class="svc-why-card reveal delay-2"><div class="svc-why-icon"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div><h3>One Dedicated Adviser</h3><p>One person handles your case from start to finish. No call centres — consistent, expert advice you can trust.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="svc-review-section">
+  <div class="svc-review-inner reveal">
+    <p class="svc-review-label">Client Review</p>
+    <div class="svc-review-card">
+      <div class="svc-review-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+      <p class="svc-review-quote">"Made what I thought would be a stressful process feel straightforward and manageable. Communication was excellent throughout — I always felt supported."</p>
+      <div class="svc-review-author">
+        <div class="svc-review-avatar">SC</div>
+        <div style="text-align:left;">
+          <div class="svc-review-name">SMP Client</div>
+          <div class="svc-review-role">Estate Planning Client</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="svc-cta-section">
+  <div class="svc-cta-inner reveal">
+    <span class="section-tag" style="color:var(--gold-light);justify-content:center;">Ready to Start</span>
+    <h2 class="svc-cta-h2">Secure your legacy<br/><em>starting today.</em></h2>
+    <p class="svc-cta-sub">A free conversation is all it takes to start protecting your estate and your family's future.</p>
+    <div class="svc-cta-actions">
+      <button class="btn-primary open-modal">Get Free Estate Planning Advice</button>
+      <button class="btn-outline-cream" onclick="showPage('home')">← Back to Home</button>
+    </div>
+    <div class="svc-cta-trust">
+      <div class="svc-cta-trust-item"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>FCA Regulated</div>
+      <div class="svc-cta-trust-item"><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Fee-free advice</div>
+      <div class="svc-cta-trust-item"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Dedicated adviser</div>
+    </div>
+  </div>
+</section>
+</div>
+<script>
+// ═══ PAGE ROUTER ═══
+function showPage(pageId) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  const target = document.getElementById('page-' + pageId);
+  if (target) {
+    target.classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    setTimeout(() => {
+      target.querySelectorAll('.reveal').forEach(el => {
+        el.classList.remove('visible');
+        revealObserver.observe(el);
+      });
+      updateFloatingCta();
+    }, 100);
+  }
+}
+
+// Wire up dropdown links (Services → service pages)
+document.querySelectorAll('.dropdown-item').forEach(item => {
+  item.addEventListener('click', e => {
+    e.preventDefault();
+    const href = item.getAttribute('href');
+    if (href === 'mortgages.html') showPage('mortgages');
+    else if (href === 'life-insurance.html') showPage('life-insurance');
+    else if (href === 'income-protection.html') showPage('income-protection');
+    else if (href === 'estate-planning.html') showPage('estate-planning');
+  });
+});
+
+// Wire up nav section links (Why SMP, FAQ) — go home first if on a service page, then scroll
+document.querySelectorAll('.nav-section-link').forEach(link => {
+  link.addEventListener('click', e => {
+    e.preventDefault();
+    const sectionId = link.dataset.section;
+    const homePage = document.getElementById('page-home');
+    if (!homePage.classList.contains('active')) {
+      showPage('home');
+      // Wait for page transition, then scroll to section
+      setTimeout(() => {
+        const el = document.getElementById(sectionId);
+        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 400);
+    } else {
+      const el = document.getElementById(sectionId);
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+});
+
+// ═══ MOBILE MENU ═══
+const hamburger = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobileMenu');
+function openMobileMenu() { if(mobileMenu){mobileMenu.classList.add('open'); document.body.style.overflow = 'hidden';} }
+function closeMobileMenu() { if(mobileMenu){mobileMenu.classList.remove('open'); document.body.style.overflow = '';} }
+if(hamburger) hamburger.addEventListener('click', openMobileMenu);
+const mobileMenuClose = document.getElementById('mobileMenuClose');
+if(mobileMenuClose) mobileMenuClose.addEventListener('click', closeMobileMenu);
+
+// Mobile menu link routing
+document.querySelectorAll('[data-mobile-link]').forEach(link => {
+  link.addEventListener('click', e => {
+    e.preventDefault();
+    closeMobileMenu();
+
+    const href = link.getAttribute('href');
+    const pageName = link.dataset.page;
+    const sectionName = link.dataset.section;
+
+    // Home link
+    if (pageName === 'home') {
+      setTimeout(() => showPage('home'), 300);
+      return;
+    }
+
+    // CTA / Become a Client
+    if (href === '#contact') {
+      setTimeout(openModal, 300);
+      return;
+    }
+
+    // Section links (Why SMP, FAQ) — go home then scroll
+    if (sectionName) {
+      setTimeout(() => {
+        const homePage = document.getElementById('page-home');
+        if (!homePage.classList.contains('active')) {
+          showPage('home');
+          setTimeout(() => {
+            const el = document.getElementById(sectionName);
+            if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }, 400);
+        } else {
+          const el = document.getElementById(sectionName);
+          if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 300);
+      return;
+    }
+
+    // Service page links (.html)
+    if (href && href.endsWith('.html')) {
+      const page = href.replace('.html','');
+      setTimeout(() => showPage(page), 300);
+      return;
+    }
+  });
+});
+
+// ═══ TICKER ═══
+(async function(){
+  const track = document.getElementById('tickerTrack');
+  if (!track) return;
+  try {
+    const sources = [
+      'https://feeds.bbci.co.uk/news/business/rss.xml',
+      'https://feeds.bloomberg.com/markets/news.rss',
+      'https://feeds.skynews.com/feeds/rss/business.xml'
+    ];
+    const results = await Promise.allSettled(sources.map(async url => {
+      const res = await fetch('https://api.rss2json.com/v1/api.json?rss_url=' + encodeURIComponent(url));
+      const data = await res.json();
+      return data.status === 'ok' ? data.items.slice(0, 4) : [];
+    }));
+    let items = results.flatMap(r => r.status === 'fulfilled' ? r.value : []);
+    items.sort(() => Math.random() - 0.5);
+    items = items.slice(0, 12);
+    if (!items.length) throw new Error('no items');
+    const html = items.map(i => {
+      const el = document.createElement('div'); el.innerHTML = i.title || '';
+      const t = (el.textContent || '').trim().replace(/\s+/g, ' ');
+      return t.length > 10 ? `<span class="news-ticker-item">${t}</span>` : '';
+    }).filter(Boolean).join('');
+    track.innerHTML = html + html;
+  } catch {}
+})();
+
+// ═══ HEADER SCROLL ═══
+const header = document.getElementById('siteHeader');
+window.addEventListener('scroll', () => {
+  header.classList.toggle('scrolled', window.scrollY > 60);
+}, { passive: true });
+
+// ═══ FLOATING CTA ═══
+const floatingCta = document.getElementById('floatingCta');
+function updateFloatingCta() {
+  if(!floatingCta) return;
+  const homePage = document.getElementById('page-home');
+  const onServicePage = homePage ? !homePage.classList.contains('active') : false;
+  if (onServicePage) {
+    // Always visible on service pages
+    floatingCta.classList.add('visible');
+  } else {
+    // On home page: show after scrolling past hero, hide near CTA
+    const heroHeight = window.innerHeight * 0.5;
+    const ctaSection = document.getElementById('contact');
+    const ctaReached = ctaSection ? ctaSection.getBoundingClientRect().top < window.innerHeight * 0.75 : false;
+    floatingCta.classList.toggle('visible', window.scrollY > heroHeight && !ctaReached);
+  }
+}
+if(floatingCta) {
+  window.addEventListener('scroll', updateFloatingCta, { passive: true });
+  setTimeout(updateFloatingCta, 300);
+  floatingCta.addEventListener('click', e => { e.preventDefault(); openModal(); });
+}
+
+// ═══ MODAL ═══
+const overlay = document.getElementById('modalOverlay');
+const modalClose = document.getElementById('modalClose');
+function openModal() { if(overlay){overlay.classList.add('open'); document.body.style.overflow = 'hidden';} }
+function closeModal() { if(overlay){overlay.classList.remove('open'); document.body.style.overflow = '';} }
+
+// All open-modal buttons (including service page CTAs)
+document.addEventListener('click', e => {
+  if (e.target.closest('.open-modal')) { e.preventDefault(); openModal(); }
+});
+document.querySelectorAll('a[href="#contact"]:not(.mobile-menu-cta-btn):not(.nav-section-link), .nav-cta, .btn-cream, .btn-clients-primary').forEach(el => {
+  el.addEventListener('click', e => { e.preventDefault(); openModal(); });
+});
+if(modalClose) modalClose.addEventListener('click', closeModal);
+if(overlay) overlay.addEventListener('click', e => { if (e.target === overlay) closeModal(); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+const formSubmit = document.getElementById('formSubmit');
+if(formSubmit) formSubmit.addEventListener('click', () => {
+  const name = document.getElementById('f-name').value.trim();
+  const email = document.getElementById('f-email').value.trim();
+  const phone = document.getElementById('f-phone').value.trim();
+  if (!name || !email || !phone) { alert('Please fill in your name, email and phone number.'); return; }
+  document.getElementById('formContent').style.display = 'none';
+  document.getElementById('formSuccess').style.display = 'block';
+});
+
+// ═══ REVEAL ON SCROLL ═══
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); revealObserver.unobserve(e.target); } });
+}, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
+document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+// ═══ SERVICE ACCORDION ═══
+document.querySelectorAll('.service-item').forEach(item => {
+  item.addEventListener('click', () => {
+    document.querySelectorAll('.service-item').forEach(i => i.classList.remove('active'));
+    item.classList.add('active');
+  });
+});
+
+// ═══ FAQ ACCORDION ═══
+document.querySelectorAll('.faq-item').forEach(item => {
+  item.querySelector('.faq-q').addEventListener('click', () => {
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  });
+});
+
+// ═══ STAT COUNTER ANIMATION ═══
+const counterObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting && !entry.target.dataset.counted) {
+      entry.target.dataset.counted = 'true';
+      const target = parseInt(entry.target.dataset.count);
+      if (!target) return;
+      const prefix = entry.target.dataset.prefix || '';
+      const suffix = entry.target.dataset.suffix || '';
+      const duration = 1800;
+      const startTime = performance.now();
+      function update(currentTime) {
+        const elapsed = currentTime - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        const current = Math.round(eased * target);
+        entry.target.textContent = prefix + current.toLocaleString('en-US') + suffix;
+        if (progress < 1) requestAnimationFrame(update);
+      }
+      requestAnimationFrame(update);
+    }
+  });
+}, { threshold: 0.3 });
+document.querySelectorAll('.proof-stat-number').forEach(el => counterObserver.observe(el));
+
+// ═══ STACKING TESTIMONIAL CARDS ═══
+(function(){
+  const cards = document.querySelectorAll('.t-card');
+  cards.forEach((card, i) => {
+    card.style.top = (100 + i * 16) + 'px';
+    card.style.zIndex = 10 + i;
+  });
+})();
+</script>
+</body>
+</html>
