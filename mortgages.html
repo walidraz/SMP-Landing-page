@@ -1928,19 +1928,9 @@ footer {
 <body>
 
 <!-- ═══ NEWS TICKER ═══ -->
-<div class="news-ticker" id="newsTicker">
+<div class="news-ticker" id="newsTicker" style="display:none;">
   <div class="news-ticker-label">LIVE</div>
   <div class="news-ticker-track" id="tickerTrack">
-    <span class="news-ticker-item">UK mortgage rates stabilise as inflation eases</span>
-    <span class="news-ticker-item">Life insurance premiums rise due to increasing health risks</span>
-    <span class="news-ticker-item">First-time buyers benefit from new government scheme</span>
-    <span class="news-ticker-item">Bank of England holds interest rates steady</span>
-    <span class="news-ticker-item">Property market shows resilience amid economic uncertainty</span>
-    <span class="news-ticker-item">UK mortgage rates stabilise as inflation eases</span>
-    <span class="news-ticker-item">Life insurance premiums rise due to increasing health risks</span>
-    <span class="news-ticker-item">First-time buyers benefit from new government scheme</span>
-    <span class="news-ticker-item">Bank of England holds interest rates steady</span>
-    <span class="news-ticker-item">Property market shows resilience amid economic uncertainty</span>
   </div>
 </div>
 
@@ -1950,44 +1940,34 @@ footer {
     <button class="modal-close" id="modalClose">
       <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
     </button>
-    <div id="formContent">
-      <p class="modal-eyebrow">Free · No obligation</p>
-      <h2 class="modal-title">Become a Client</h2>
-      <p class="modal-sub">Tell us a little about yourself and one of our advisers will be in touch within 24 hours.</p>
-      <div class="form-group">
-        <label class="form-label" for="f-name">Full Name</label>
-        <input class="form-input" type="text" id="f-name" placeholder="e.g. James Wilson" autocomplete="name"/>
-      </div>
-      <div class="form-group">
-        <label class="form-label" for="f-email">Email Address</label>
-        <input class="form-input" type="email" id="f-email" placeholder="you@example.com" autocomplete="email"/>
-      </div>
-      <div class="form-group">
-        <label class="form-label" for="f-phone">Phone Number</label>
-        <input class="form-input" type="tel" id="f-phone" placeholder="+44 7700 900000" autocomplete="tel"/>
-      </div>
-      <p class="interest-label">I'm interested in</p>
-      <div class="interest-grid">
-        <div class="interest-opt">
-          <input type="checkbox" id="i-mortgage" value="Mortgages"/>
-          <label for="i-mortgage">🏠 Mortgages</label>
+    <form id="callbackForm" name="callback-request" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+      <input type="hidden" name="form-name" value="callback-request"/>
+      <input type="hidden" name="service" id="f-service" value=""/>
+      <p style="display:none;"><label>Don't fill this out: <input name="bot-field"/></label></p>
+      <div id="formContent">
+        <p class="modal-eyebrow">Free · No obligation</p>
+        <h2 class="modal-title">Request a Callback</h2>
+        <p class="modal-sub">Leave your details and one of our advisers will call you back — usually within a few hours.</p>
+        <div class="form-group">
+          <label class="form-label" for="f-name">Full Name</label>
+          <input class="form-input" type="text" name="name" id="f-name" required placeholder="e.g. James Wilson" autocomplete="name"/>
         </div>
-        <div class="interest-opt">
-          <input type="checkbox" id="i-life" value="Life Insurance"/>
-          <label for="i-life">🛡 Life Insurance</label>
+        <div class="form-group">
+          <label class="form-label" for="f-email">Email Address</label>
+          <input class="form-input" type="email" name="email" id="f-email" required placeholder="you@example.com" autocomplete="email"/>
         </div>
-        <div class="interest-opt">
-          <input type="checkbox" id="i-income" value="Income Protection"/>
-          <label for="i-income">💼 Income Protection</label>
+        <div class="form-group">
+          <label class="form-label" for="f-phone">Phone Number</label>
+          <input class="form-input" type="tel" name="phone" id="f-phone" required placeholder="+44 7700 900000" autocomplete="tel"/>
         </div>
-        <div class="interest-opt">
-          <input type="checkbox" id="i-estate" value="Estate Planning"/>
-          <label for="i-estate">📋 Estate Planning</label>
+        <div class="form-group">
+          <label class="form-label" for="f-age">Your Age</label>
+          <input class="form-input" type="number" name="age" id="f-age" required min="18" max="100" placeholder="e.g. 35"/>
         </div>
+        <button type="submit" class="btn-submit" id="formSubmit">Request a Callback</button>
+        <p class="form-note">By submitting you agree to our Privacy Policy. We'll never share your details.</p>
       </div>
-      <button class="btn-submit" id="formSubmit">Request a Callback</button>
-      <p class="form-note">By submitting you agree to our Privacy Policy. We'll never share your details.</p>
-    </div>
+    </form>
     <div class="form-success" id="formSuccess">
       <div class="form-success-icon">
         <svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
@@ -3195,15 +3175,67 @@ if(modalClose) modalClose.addEventListener('click', closeModal);
 if(overlay) overlay.addEventListener('click', e => { if (e.target === overlay) closeModal(); });
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 
-const formSubmit = document.getElementById('formSubmit');
-if(formSubmit) formSubmit.addEventListener('click', () => {
-  const name = document.getElementById('f-name').value.trim();
-  const email = document.getElementById('f-email').value.trim();
-  const phone = document.getElementById('f-phone').value.trim();
-  if (!name || !email || !phone) { alert('Please fill in your name, email and phone number.'); return; }
-  document.getElementById('formContent').style.display = 'none';
-  document.getElementById('formSuccess').style.display = 'block';
+// ═══ CALLBACK FORM — AJAX submit to Netlify Forms ═══
+const callbackForm = document.getElementById('callbackForm');
+if (callbackForm) callbackForm.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const submitBtn = document.getElementById('formSubmit');
+  const originalText = submitBtn.textContent;
+  submitBtn.disabled = true;
+  submitBtn.textContent = 'Sending…';
+
+  // Tag which service page they submitted from
+  const serviceField = document.getElementById('f-service');
+  const pageMatch = window.location.pathname.match(/\/([a-z-]+)/);
+  if (serviceField && pageMatch) serviceField.value = pageMatch[1];
+  else if (serviceField) serviceField.value = 'home';
+
+  const formData = new FormData(callbackForm);
+  try {
+    const response = await fetch('/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams(formData).toString()
+    });
+    if (!response.ok) throw new Error('Submission failed');
+    document.getElementById('formContent').style.display = 'none';
+    document.getElementById('formSuccess').style.display = 'block';
+    launchConfetti();
+  } catch (err) {
+    alert('Sorry, something went wrong. Please try again — or call us directly.');
+    submitBtn.disabled = false;
+    submitBtn.textContent = originalText;
+  }
 });
+
+// ═══ CONFETTI — lightweight, no dependencies ═══
+function launchConfetti() {
+  const colors = ['#b8892a','#d4a84b','#1a3028','#2d4a3e','#f5f0e8','#ffffff'];
+  for (let i = 0; i < 80; i++) {
+    const c = document.createElement('div');
+    const size = 6 + Math.random() * 8;
+    c.style.cssText = `position:fixed;width:${size}px;height:${size}px;background:${colors[i%colors.length]};top:45%;left:50%;border-radius:${Math.random()>0.5?'50%':'2px'};pointer-events:none;z-index:10000;transition:transform 1.8s cubic-bezier(.15,.75,.45,1),opacity 1.8s ease-out;`;
+    document.body.appendChild(c);
+    requestAnimationFrame(() => {
+      const angle = Math.random() * Math.PI * 2;
+      const dist = 220 + Math.random() * 320;
+      c.style.transform = `translate(${Math.cos(angle)*dist}px, ${Math.sin(angle)*dist + 260}px) rotate(${Math.random()*720}deg)`;
+      c.style.opacity = '0';
+    });
+    setTimeout(() => c.remove(), 2000);
+  }
+}
+
+// ═══ AUTO-OPEN MODAL ON SERVICE LANDING PAGES ═══
+(function() {
+  const activePage = document.querySelector('.page.active');
+  if (!activePage || activePage.id === 'page-home') return; // only on service pages
+  if (sessionStorage.getItem('modalAutoOpened')) return; // only once per session
+  setTimeout(() => {
+    openModal();
+    sessionStorage.setItem('modalAutoOpened', '1');
+  }, 2000);
+})();
 
 // ═══ REVEAL ON SCROLL ═══
 const revealObserver = new IntersectionObserver((entries) => {
