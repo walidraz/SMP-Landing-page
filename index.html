@@ -3212,11 +3212,18 @@ const revealObserver = new IntersectionObserver((entries) => {
 }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
 document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 
-// ═══ SERVICE ACCORDION ═══
+// ═══ SERVICE ACCORDION + ROUTING ═══
 document.querySelectorAll('.service-item').forEach(item => {
+  item.style.cursor = 'pointer';
   item.addEventListener('click', () => {
     document.querySelectorAll('.service-item').forEach(i => i.classList.remove('active'));
     item.classList.add('active');
+    const heading = (item.querySelector('h3')?.textContent || '').trim().toLowerCase();
+    if (heading.includes('mortgage')) showPage('mortgages');
+    else if (heading.includes('life insurance')) showPage('life-insurance');
+    else if (heading.includes('critical illness')) showPage('life-insurance');
+    else if (heading.includes('income protection')) showPage('income-protection');
+    else if (heading.includes('estate planning')) showPage('estate-planning');
   });
 });
 
