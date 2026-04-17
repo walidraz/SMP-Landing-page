@@ -1,0 +1,35 @@
+[build]
+  publish = "."
+  functions = "netlify/functions"
+
+# HTML pages — short cache so edits go live fast, but repeat-visits don't re-download
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=600, must-revalidate"
+
+# Pretty URLs (e.g. /life-insurance) — same cache
+[[headers]]
+  for = "/life-insurance"
+  [headers.values]
+    Cache-Control = "public, max-age=600, must-revalidate"
+[[headers]]
+  for = "/mortgages"
+  [headers.values]
+    Cache-Control = "public, max-age=600, must-revalidate"
+[[headers]]
+  for = "/income-protection"
+  [headers.values]
+    Cache-Control = "public, max-age=600, must-revalidate"
+[[headers]]
+  for = "/estate-planning"
+  [headers.values]
+    Cache-Control = "public, max-age=600, must-revalidate"
+
+# Assets (fonts, images, etc.) — cache hard (1 day)
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "SAMEORIGIN"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
