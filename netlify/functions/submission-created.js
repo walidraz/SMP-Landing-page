@@ -1,7 +1,7 @@
 // Fires on every Netlify Form submission.
 // Sends a WhatsApp notification to the SMP team via Twilio.
 
-const NOTIFY_WHATSAPP = 'whatsapp:+447757710284'; // destination (joined sandbox with "join fallen-deal")
+const NOTIFY_WHATSAPP = 'whatsapp:+447727629926'; // destination (joined sandbox with "join fallen-deal")
 
 export const handler = async (event) => {
   try {
