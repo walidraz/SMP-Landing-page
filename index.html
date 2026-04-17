@@ -3090,6 +3090,7 @@ document.querySelectorAll('[data-mobile-link]').forEach(link => {
 
     // CTA / Become a Client
     if (href === '#contact') {
+      trackCTAClick('Mobile menu: ' + (link.textContent.trim().slice(0, 40) || 'Become a Client'));
       setTimeout(openModal, 300);
       return;
     }
@@ -3168,7 +3169,7 @@ function updateFloatingCta() {
 if(floatingCta) {
   window.addEventListener('scroll', updateFloatingCta, { passive: true });
   setTimeout(updateFloatingCta, 300);
-  floatingCta.addEventListener('click', e => { e.preventDefault(); openModal(); });
+  floatingCta.addEventListener('click', e => { e.preventDefault(); trackCTAClick('Floating Book a Free Call'); openModal(); });
 }
 
 // ═══ MODAL ═══
@@ -3177,12 +3178,29 @@ const modalClose = document.getElementById('modalClose');
 function openModal() { if(overlay){overlay.classList.add('open'); document.body.style.overflow = 'hidden';} }
 function closeModal() { if(overlay){overlay.classList.remove('open'); document.body.style.overflow = '';} }
 
+// Track CTA click to Meta Pixel (Contact event) — only fires on user click, not auto-open
+function trackCTAClick(label) {
+  if (typeof fbq === 'undefined') return;
+  const activePage = document.querySelector('.page.active');
+  const slug = activePage ? activePage.id.replace('page-', '') : 'home';
+  fbq('track', 'Contact', { content_name: label || 'CTA', content_category: slug });
+}
+
 // All open-modal buttons (including service page CTAs)
 document.addEventListener('click', e => {
-  if (e.target.closest('.open-modal')) { e.preventDefault(); openModal(); }
+  const target = e.target.closest('.open-modal');
+  if (target) {
+    e.preventDefault();
+    trackCTAClick(target.textContent.trim().slice(0, 60));
+    openModal();
+  }
 });
 document.querySelectorAll('a[href="#contact"]:not(.mobile-menu-cta-btn):not(.nav-section-link).nav-cta.btn-cream.btn-clients-primary').forEach(el => {
-  el.addEventListener('click', e => { e.preventDefault(); openModal(); });
+  el.addEventListener('click', e => {
+    e.preventDefault();
+    trackCTAClick(el.textContent.trim().slice(0, 60) || 'Become a Client');
+    openModal();
+  });
 });
 if(modalClose) modalClose.addEventListener('click', closeModal);
 if(overlay) overlay.addEventListener('click', e => { if (e.target === overlay) closeModal(); });
