@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Income Protection — Secure Mortgages & Protection</title>
-<meta name="description" content="Income protection insurance — replace your salary if illness or injury stops you working. Fee-free, whole-of-market advice from FCA regulated experts."/>
+<title>Income Protection, Secure Mortgages & Protection</title>
+<meta name="description" content="Income protection insurance. Replace your salary if illness or injury stops you working. Fee-free, whole-of-market advice from FCA regulated experts."/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
 <style>
@@ -1330,8 +1330,8 @@ footer {
   .faq-sticky { position: static; }
 
   .footer-top { grid-template-columns: 1fr 1fr; gap: 40px; }
-  .section, .section-full { padding: 80px 32px; }
-  .services-layout, .why-layout, .process-layout, .testimonials-layout, .cta-layout, .faq-layout { padding: 80px 32px; }
+  .section.section-full { padding: 80px 32px; }
+  .services-layout.why-layout.process-layout.testimonials-layout.cta-layout.faq-layout { padding: 80px 32px; }
 }
 
 @media (max-width: 640px) {
@@ -1362,8 +1362,7 @@ footer {
   .marquee-item { font-size: 11px; padding: 0 20px; }
 
   /* ── SERVICES ── */
-  .services-layout, .why-layout, .process-layout,
-  .testimonials-layout, .cta-layout, .faq-layout { padding: 60px 20px; }
+  .services-layout.why-layout.process-layout.testimonials-layout.cta-layout.faq-layout { padding: 60px 20px; }
   .service-item { padding: 22px 0; grid-template-columns: 24px 1fr 20px; gap: 14px; }
   .service-content h3 { font-size: 20px; }
   .service-num { font-size: 12px; }
@@ -1425,7 +1424,7 @@ footer {
   display: block;
   text-align: center;
 }
-.mobile-menu-link:hover, .mobile-menu-link:active { color: var(--gold-light); }
+.mobile-menu-link:hover.mobile-menu-link:active { color: var(--gold-light); }
 .mobile-menu-cta-btn {
   margin-top: 28px;
   background: var(--gold);
@@ -1536,7 +1535,7 @@ footer {
   transition: background 0.2s;
 }
 
-.floating-cta, .floating-cta:visited, .floating-cta:hover {
+.floating-cta.floating-cta:visited.floating-cta:hover {
   text-decoration: none;
 }
 
@@ -1677,8 +1676,7 @@ footer {
   .svc-cta-section{padding:60px 20px;}
   .type-card,.svc-why-card{padding:32px 24px;}
   .svc-cta-actions{flex-direction:column;align-items:stretch;width:100%;max-width:360px;margin:0 auto;}
-  .svc-cta-actions .btn-primary,
-  .svc-cta-actions .btn-outline-cream{width:100%;text-align:center;justify-content:center;}
+  .svc-cta-actions .btn-primary.svc-cta-actions .btn-outline-cream{width:100%;text-align:center;justify-content:center;}
   .svc-cta-trust{flex-direction:column;gap:12px;}
 }
 .clients-section {
@@ -1916,8 +1914,7 @@ footer {
   .clients-stat-val { font-size: 20px; }
   .clients-stat-label { font-size: 9px; }
   .clients-actions { flex-direction: column; align-items: stretch; }
-  .clients-actions .btn-clients-primary,
-  .clients-actions .btn-clients-outline { width: 100%; text-align: center; justify-content: center; }
+  .clients-actions .btn-clients-primary.clients-actions .btn-clients-outline { width: 100%; text-align: center; justify-content: center; }
   .clients-h2 { font-size: 30px; }
   .clients-desc { font-size: 14px; }
   .t-card { padding: 24px 20px 20px; border-radius: 14px; }
@@ -1945,9 +1942,9 @@ footer {
       <input type="hidden" name="service" id="f-service" value=""/>
       <p style="display:none;"><label>Don't fill this out: <input name="bot-field"/></label></p>
       <div id="formContent">
-        <p class="modal-eyebrow">Free · No obligation</p>
-        <h2 class="modal-title">Request a Callback</h2>
-        <p class="modal-sub">Leave your details and one of our advisers will call you back — usually within a few hours.</p>
+        <p class="modal-eyebrow" id="modalEyebrow">FREE · NO OBLIGATION</p>
+        <h2 class="modal-title" id="modalTitle">Request a callback</h2>
+        <p class="modal-sub" id="modalSub">Leave your details and one of our advisers will call you back, usually within a few hours.</p>
         <div class="form-group">
           <label class="form-label" for="f-name">Full Name</label>
           <input class="form-input" type="text" name="name" id="f-name" required placeholder="e.g. James Wilson" autocomplete="name"/>
@@ -2039,7 +2036,7 @@ footer {
   </button>
 </header>
 
-<!-- ─── FLOATING CTA (global — visible on every page) ─── -->
+<!-- ─── FLOATING CTA (global, visible on every page) ─── -->
 <div class="floating-cta" id="floatingCta">
   <div class="floating-cta-inner">
     <span class="floating-cta-dot"></span>
@@ -2172,7 +2169,7 @@ footer {
         <span class="service-num">01</span>
         <div class="service-content">
           <h3>Mortgages</h3>
-          <p>First-time buyer, remortgage, buy-to-let, and complex income — we search the whole market to find you the right deal.</p>
+          <p>First-time buyer, remortgage, buy-to-let, and complex income, we search the whole market to find you the right deal.</p>
         </div>
         <span class="service-arrow">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
@@ -2182,7 +2179,7 @@ footer {
         <span class="service-num">02</span>
         <div class="service-content">
           <h3>Life Insurance</h3>
-          <p>Comprehensive life cover tailored to your family's needs — term, whole of life, and joint policies arranged from across the market.</p>
+          <p>Comprehensive life cover tailored to your family's needs, term, whole of life, and joint policies arranged from across the market.</p>
         </div>
         <span class="service-arrow">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
@@ -2192,7 +2189,7 @@ footer {
         <span class="service-num">03</span>
         <div class="service-content">
           <h3>Critical Illness Cover</h3>
-          <p>A lump sum paid if you're diagnosed with a serious illness — so you can focus on recovery, not finances.</p>
+          <p>A lump sum paid if you're diagnosed with a serious illness, so you can focus on recovery, not finances.</p>
         </div>
         <span class="service-arrow">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
@@ -2202,7 +2199,7 @@ footer {
         <span class="service-num">04</span>
         <div class="service-content">
           <h3>Income Protection</h3>
-          <p>Replace your income if illness or injury stops you working — maintaining your lifestyle when you need it most.</p>
+          <p>Replace your income if illness or injury stops you working, maintaining your lifestyle when you need it most.</p>
         </div>
         <span class="service-arrow">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
@@ -2212,7 +2209,7 @@ footer {
         <span class="service-num">05</span>
         <div class="service-content">
           <h3>Estate Planning & Wills</h3>
-          <p>Ensure your assets pass to the right people, efficiently and without unnecessary tax — backed by expert legal and financial guidance.</p>
+          <p>Ensure your assets pass to the right people, efficiently and without unnecessary tax, backed by expert legal and financial guidance.</p>
         </div>
         <span class="service-arrow">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
@@ -2230,13 +2227,13 @@ footer {
         <span class="tag" style="color: var(--gold-light);">Why SMP</span>
         <h2 class="why-h2">Independent advice<br/>in your <em>best interests.</em></h2>
       </div>
-      <p class="why-intro reveal delay-1">We don't work for insurance companies or banks. We work for you — which means every recommendation we make is driven solely by what's right for your situation.</p>
+      <p class="why-intro reveal delay-1">We don't work for insurance companies or banks. We work for you, which means every recommendation we make is driven solely by what's right for your situation.</p>
     </div>
     <div class="why-grid">
       <div class="why-card reveal">
         <div class="why-card-num">01</div>
         <h3>Whole-of-Market Access</h3>
-        <p>We compare products from across the entire market — not just a limited panel — ensuring you always get the most competitive deal available.</p>
+        <p>We compare products from across the entire market, not just a limited panel, ensuring you always get the most competitive deal available.</p>
       </div>
       <div class="why-card reveal delay-1">
         <div class="why-card-num">02</div>
@@ -2251,7 +2248,7 @@ footer {
       <div class="why-card reveal delay-2">
         <div class="why-card-num">05</div>
         <h3>Fee-Free Service</h3>
-        <p>Our advice is free to you. We receive commission from providers, which is always disclosed upfront — full transparency, no surprises.</p>
+        <p>Our advice is free to you. We receive commission from providers, which is always disclosed upfront, full transparency, no surprises.</p>
       </div>
       <div class="why-card reveal delay-3">
         <div class="why-card-num">06</div>
@@ -2261,7 +2258,7 @@ footer {
       <div class="why-card reveal delay-1">
         <div class="why-card-num">07</div>
         <h3>Thousands Helped</h3>
-        <p>We've helped thousands of families across the UK secure the right mortgage and life protection — and we're just getting started.</p>
+        <p>We've helped thousands of families across the UK secure the right mortgage and life protection, and we're just getting started.</p>
       </div>
     </div>
   </div>
@@ -2284,7 +2281,7 @@ footer {
           <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
         </div>
         <h3>Tell us about yourself</h3>
-        <p>A relaxed 30-minute call with a dedicated adviser. No jargon. We listen first — to your goals, your worries, your situation — before we say anything.</p>
+        <p>A relaxed 30-minute call with a dedicated adviser. No jargon. We listen first, to your goals, your worries, your situation, before we say anything.</p>
       </div>
       <div class="process-step reveal delay-2">
         <div class="step-icon">
@@ -2292,7 +2289,7 @@ footer {
           <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
         </div>
         <h3>Get your bespoke plan</h3>
-        <p>We research the whole market and come back with a clear recommendation — the right products, the right level of cover, and the right price for you.</p>
+        <p>We research the whole market and come back with a clear recommendation, the right products, the right level of cover, and the right price for you.</p>
       </div>
       <div class="process-step reveal delay-3">
         <div class="step-icon">
@@ -2300,7 +2297,7 @@ footer {
           <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
         </div>
         <h3>Protect your future</h3>
-        <p>Once you're happy, we handle everything — applications, paperwork, and providers. Then we check in every year to make sure your plan still fits your life.</p>
+        <p>Once you're happy, we handle everything, applications, paperwork, and providers. Then we check in every year to make sure your plan still fits your life.</p>
       </div>
     </div>
   </div>
@@ -2318,7 +2315,7 @@ footer {
         Happy Clients
       </span>
       <h2 class="clients-h2">Clients who trust us to <em>protect</em> what matters.</h2>
-      <p class="clients-desc">Trusted by thousands of clients nationwide — from first-time buyers to growing families across the UK.</p>
+      <p class="clients-desc">Trusted by thousands of clients nationwide, from first-time buyers to growing families across the UK.</p>
       <div class="clients-stats">
         <div class="clients-stat">
           <div class="clients-stat-val">800+</div>
@@ -2389,7 +2386,7 @@ footer {
             <span class="t-star">★</span><span class="t-star">★</span><span class="t-star">★</span><span class="t-star">★</span><span class="t-star">★</span>
           </div>
         </div>
-        <p class="t-quote">"As a new business owner, SMP made my first year simple. It felt collaborative — I could ask anything at any time. Gave me real confidence planning for myself, my business, and my family."</p>
+        <p class="t-quote">"As a new business owner, SMP made my first year simple. It felt collaborative, I could ask anything at any time. Gave me real confidence planning for myself, my business, and my family."</p>
       </div>
 
       <div class="t-card">
@@ -2406,7 +2403,7 @@ footer {
             <span class="t-star">★</span><span class="t-star">★</span><span class="t-star">★</span><span class="t-star">★</span><span class="t-star">★</span>
           </div>
         </div>
-        <p class="t-quote">"Professional but approachable from the very first conversation. Never felt rushed or pushed into anything — gave me real confidence I was making the right decision for my family."</p>
+        <p class="t-quote">"Professional but approachable from the very first conversation. Never felt rushed or pushed into anything, gave me real confidence I was making the right decision for my family."</p>
       </div>
 
       <div class="t-card">
@@ -2423,7 +2420,7 @@ footer {
             <span class="t-star">★</span><span class="t-star">★</span><span class="t-star">★</span><span class="t-star">★</span><span class="t-star">★</span>
           </div>
         </div>
-        <p class="t-quote">"Patient, responsive, and no question ever felt silly. Everything was explained clearly and honestly — made the whole process smooth and completely stress-free."</p>
+        <p class="t-quote">"Patient, responsive, and no question ever felt silly. Everything was explained clearly and honestly, made the whole process smooth and completely stress-free."</p>
       </div>
 
       <div class="t-card">
@@ -2440,7 +2437,7 @@ footer {
             <span class="t-star">★</span><span class="t-star">★</span><span class="t-star">★</span><span class="t-star">★</span><span class="t-star">★</span>
           </div>
         </div>
-        <p class="t-quote">"Made what I thought would be a stressful process feel straightforward and manageable. Communication was excellent throughout — I always felt supported."</p>
+        <p class="t-quote">"Made what I thought would be a stressful process feel straightforward and manageable. Communication was excellent throughout, I always felt supported."</p>
       </div>
     </div>
 
@@ -2453,7 +2450,7 @@ footer {
     <div class="faq-sticky reveal">
       <span class="tag">FAQ</span>
       <h2 class="h2" style="font-size:clamp(36px,3.5vw,52px);">Your questions, <em>answered.</em></h2>
-      <p style="font-size:14px;font-weight:300;line-height:1.8;color:var(--muted);margin-top:24px;margin-bottom:40px;">Can't find what you're looking for? We're always happy to help — reach out directly and we'll come back to you within 24 hours.</p>
+      <p style="font-size:14px;font-weight:300;line-height:1.8;color:var(--muted);margin-top:24px;margin-bottom:40px;">Can't find what you're looking for? We're always happy to help, reach out directly and we'll come back to you within 24 hours.</p>
       <a href="#contact" class="btn-primary">Contact us</a>
     </div>
     <div class="faq-list reveal delay-2">
@@ -2464,7 +2461,7 @@ footer {
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
           </span>
         </div>
-        <div class="faq-a">We offer mortgages, life insurance, critical illness and income protection, estate planning, wills, and business protection — all arranged on a whole-of-market basis.</div>
+        <div class="faq-a">We offer mortgages, life insurance, critical illness and income protection, estate planning, wills, and business protection, all arranged on a whole-of-market basis.</div>
       </div>
       <div class="faq-item">
         <div class="faq-q">
@@ -2473,7 +2470,7 @@ footer {
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
           </span>
         </div>
-        <div class="faq-a">Yes. Our advice is free to you. We receive commission from the product providers we recommend — always disclosed clearly and upfront before you commit to anything.</div>
+        <div class="faq-a">Yes. Our advice is free to you. We receive commission from the product providers we recommend, always disclosed clearly and upfront before you commit to anything.</div>
       </div>
       <div class="faq-item">
         <div class="faq-q">
@@ -2491,7 +2488,7 @@ footer {
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
           </span>
         </div>
-        <div class="faq-a">Yes — this is something we specialise in. Whether you're a sole trader, contractor, or company director, we work with lenders who understand non-standard income and can find competitive rates that high-street banks often can't offer.</div>
+        <div class="faq-a">Yes, this is something we specialise in. Whether you're a sole trader, contractor, or company director, we work with lenders who understand non-standard income and can find competitive rates that high-street banks often can't offer.</div>
       </div>
       <div class="faq-item">
         <div class="faq-q">
@@ -2500,7 +2497,7 @@ footer {
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
           </span>
         </div>
-        <div class="faq-a">Click "Become a Client" and complete a short enquiry. We'll match you with a qualified adviser within 24 hours and arrange a call at a time that suits you — no obligation, no pressure.</div>
+        <div class="faq-a">Click "Become a Client" and complete a short enquiry. We'll match you with a qualified adviser within 24 hours and arrange a call at a time that suits you, no obligation, no pressure.</div>
       </div>
     </div>
   </div>
@@ -2512,7 +2509,7 @@ footer {
     <div class="reveal">
       <span class="tag" style="color:var(--gold-light);">Get Started</span>
       <h2 class="cta-h2">Start building your <em>future</em> today.</h2>
-      <p class="cta-sub">A 30-minute call could be the most valuable financial conversation you ever have. No jargon, no obligation — just honest, expert advice built around your life.</p>
+      <p class="cta-sub">A 30-minute call could be the most valuable financial conversation you ever have. No jargon, no obligation, just honest, expert advice built around your life.</p>
       <div class="cta-btn-row">
         <a href="#" class="btn-cream">
           Book a free call
@@ -2540,7 +2537,7 @@ footer {
         </div>
         <div>
           <div class="trust-title">Whole-of-Market Advice</div>
-          <div class="trust-desc">We compare every provider — not a restricted panel — to find your best option.</div>
+          <div class="trust-desc">We compare every provider, not a restricted panel, to find your best option.</div>
         </div>
       </div>
       <div class="trust-item">
@@ -2597,7 +2594,7 @@ footer {
 
 </div><!-- end page-home -->
 
-<!-- ═══ MOBILE MENU (global — outside all pages) ═══ -->
+<!-- ═══ MOBILE MENU (global, outside all pages) ═══ -->
 <div class="mobile-menu" id="mobileMenu">
   <button class="mobile-menu-close" id="mobileMenuClose">
     <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
@@ -2621,7 +2618,7 @@ footer {
   <div class="svc-hero-inner">
     <p class="svc-hero-eyebrow">Mortgage Advice · FCA Regulated</p>
     <h1>The right mortgage.<br/><em>First time,</em><br/>every time.</h1>
-    <p class="svc-hero-sub">Whole-of-market mortgage advice tailored to your situation — whether you're buying your first home, remortgaging, or investing in property.</p>
+    <p class="svc-hero-sub">Whole-of-market mortgage advice tailored to your situation, whether you're buying your first home, remortgaging, or investing in property.</p>
     <div class="svc-hero-actions">
       <button class="btn-primary open-modal">Get Free Advice <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
       <button class="back-link" onclick="showPage('home')"><svg viewBox="0 0 24 24"><polyline points="19 12 5 12"/><polyline points="12 19 5 12 12 5"/></svg> Back to Home</button>
@@ -2642,10 +2639,10 @@ footer {
       <p class="section-intro">Whatever your situation, we search the whole market to find the most competitive rate and the right deal for you.</p>
     </div>
     <div class="types-grid">
-      <div class="type-card reveal delay-1"><div class="type-card-num">01</div><h3>First-Time Buyer</h3><p>Buying your first home is one of the biggest decisions of your life. We guide you through every step — from Agreement in Principle to completion.</p><span class="type-card-tag">Most popular</span></div>
+      <div class="type-card reveal delay-1"><div class="type-card-num">01</div><h3>First-Time Buyer</h3><p>Buying your first home is one of the biggest decisions of your life. We guide you through every step, from Agreement in Principle to completion.</p><span class="type-card-tag">Most popular</span></div>
       <div class="type-card reveal delay-2"><div class="type-card-num">02</div><h3>Remortgage</h3><p>Coming to the end of your fixed rate? We'll search the market to find you a better deal before you roll onto your lender's standard variable rate.</p><span class="type-card-tag">Save money now</span></div>
       <div class="type-card reveal delay-1"><div class="type-card-num">03</div><h3>Buy-to-Let</h3><p>Whether you're building a portfolio or buying your first investment property, we find buy-to-let mortgages tailored to your rental income and goals.</p><span class="type-card-tag">For investors</span></div>
-      <div class="type-card reveal delay-2"><div class="type-card-num">04</div><h3>Self-Employed</h3><p>Complex income doesn't mean a complicated process. We work with lenders who understand self-employed applicants — sole traders and directors welcome.</p><span class="type-card-tag">Specialist advice</span></div>
+      <div class="type-card reveal delay-2"><div class="type-card-num">04</div><h3>Self-Employed</h3><p>Complex income doesn't mean a complicated process. We work with lenders who understand self-employed applicants, sole traders and directors welcome.</p><span class="type-card-tag">Specialist advice</span></div>
     </div>
   </div>
 </section>
@@ -2657,9 +2654,9 @@ footer {
       <h2 class="section-h2" style="color:var(--cream);">Three steps to your<br/><em>perfect mortgage.</em></h2>
     </div>
     <div class="svc-process-steps">
-      <div class="svc-process-step reveal delay-1"><div class="svc-step-icon"><span class="svc-step-num">1</span><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div><h3>Free Consultation</h3><p>Tell us about your situation, income, and what you're looking for. No jargon, no pressure — just an honest conversation about your options.</p></div>
+      <div class="svc-process-step reveal delay-1"><div class="svc-step-icon"><span class="svc-step-num">1</span><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div><h3>Free Consultation</h3><p>Tell us about your situation, income, and what you're looking for. No jargon, no pressure, just an honest conversation about your options.</p></div>
       <div class="svc-process-step reveal delay-2"><div class="svc-step-icon"><span class="svc-step-num">2</span><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div><h3>We Search the Market</h3><p>Your adviser searches thousands of mortgage products across the whole market to find the most competitive rate for your circumstances.</p></div>
-      <div class="svc-process-step reveal delay-3"><div class="svc-step-icon"><span class="svc-step-num">3</span><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div><h3>You Get the Keys</h3><p>We handle the paperwork, liaise with lenders, and keep you updated at every stage. You focus on the exciting part — we handle the rest.</p></div>
+      <div class="svc-process-step reveal delay-3"><div class="svc-step-icon"><span class="svc-step-num">3</span><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div><h3>You Get the Keys</h3><p>We handle the paperwork, liaise with lenders, and keep you updated at every stage. You focus on the exciting part, we handle the rest.</p></div>
     </div>
   </div>
 </section>
@@ -2670,8 +2667,8 @@ footer {
     <div class="svc-why-grid">
       <div class="svc-why-card reveal delay-1"><div class="svc-why-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/></svg></div><h3>Whole of Market</h3><p>We're not tied to a panel of lenders. We search every available mortgage product to find the right fit for your situation.</p></div>
       <div class="svc-why-card reveal delay-2"><div class="svc-why-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><h3>FCA Regulated</h3><p>Fully authorised and regulated by the Financial Conduct Authority. Your advice and your data are fully protected.</p></div>
-      <div class="svc-why-card reveal delay-1"><div class="svc-why-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div><h3>Completely Fee-Free</h3><p>Our mortgage advice is free to you. We receive commission from the lender once your mortgage completes — always disclosed upfront.</p></div>
-      <div class="svc-why-card reveal delay-2"><div class="svc-why-icon"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div><h3>One Dedicated Adviser</h3><p>You deal with one person from start to finish. No call centres, no being passed around — consistent, expert advice.</p></div>
+      <div class="svc-why-card reveal delay-1"><div class="svc-why-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div><h3>Completely Fee-Free</h3><p>Our mortgage advice is free to you. We receive commission from the lender once your mortgage completes, always disclosed upfront.</p></div>
+      <div class="svc-why-card reveal delay-2"><div class="svc-why-icon"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div><h3>One Dedicated Adviser</h3><p>You deal with one person from start to finish. No call centres, no being passed around, consistent, expert advice.</p></div>
     </div>
   </div>
 </section>
@@ -2681,7 +2678,7 @@ footer {
     <p class="svc-review-label">Client Review</p>
     <div class="svc-review-card">
       <div class="svc-review-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
-      <p class="svc-review-quote">"As a new business owner, SMP made my first year simple. It felt collaborative — I could ask anything at any time. Gave me real confidence planning for myself, my business, and my family."</p>
+      <p class="svc-review-quote">"As a new business owner, SMP made my first year simple. It felt collaborative, I could ask anything at any time. Gave me real confidence planning for myself, my business, and my family."</p>
       <div class="svc-review-author">
         <div class="svc-review-avatar">KA</div>
         <div style="text-align:left;">
@@ -2697,7 +2694,7 @@ footer {
   <div class="svc-cta-inner reveal">
     <span class="section-tag" style="color:var(--gold-light);justify-content:center;">Ready to Start</span>
     <h2 class="svc-cta-h2">Find your<br/><em>perfect mortgage</em><br/>today.</h2>
-    <p class="svc-cta-sub">Speak with a dedicated adviser — free, no obligation, and no jargon.</p>
+    <p class="svc-cta-sub">Speak with a dedicated adviser, free, no obligation, and no jargon.</p>
     <div class="svc-cta-actions">
       <button class="btn-primary open-modal">Get Free Mortgage Advice</button>
       <button class="btn-outline-cream" onclick="showPage('home')">← Back to Home</button>
@@ -2716,7 +2713,7 @@ footer {
   <div class="svc-hero-inner">
     <p class="svc-hero-eyebrow">Life Insurance · FCA Regulated</p>
     <h1>Protect your family.<br/><em>Whatever</em><br/>happens.</h1>
-    <p class="svc-hero-sub">Comprehensive life insurance tailored to your family's needs — so the people who matter most are always looked after, no matter what.</p>
+    <p class="svc-hero-sub">Comprehensive life insurance tailored to your family's needs, so the people who matter most are always looked after, no matter what.</p>
     <div class="svc-hero-actions">
       <button class="btn-primary open-modal">Get Free Advice <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
       <button class="back-link" onclick="showPage('home')"><svg viewBox="0 0 24 24"><polyline points="19 12 5 12"/><polyline points="12 19 5 12 12 5"/></svg> Back to Home</button>
@@ -2737,10 +2734,10 @@ footer {
       <p class="section-intro">Every family is different. We find the right type of life insurance based on your circumstances, budget, and what you want to protect.</p>
     </div>
     <div class="types-grid">
-      <div class="type-card reveal delay-1"><div class="type-card-num">01</div><h3>Term Life Insurance</h3><p>Pays out a lump sum if you die within a set period — typically 10 to 40 years. The most straightforward and affordable way to protect your family's financial future.</p><span class="type-card-tag">Most popular</span></div>
-      <div class="type-card reveal delay-2"><div class="type-card-num">02</div><h3>Whole of Life Cover</h3><p>Guaranteed to pay out whenever you die — not just within a fixed term. Ideal for estate planning and ensuring your loved ones always receive a payment.</p><span class="type-card-tag">For legacy planning</span></div>
-      <div class="type-card reveal delay-1"><div class="type-card-num">03</div><h3>Critical Illness Cover</h3><p>Pays a lump sum if you're diagnosed with a serious illness — giving you financial breathing room when you need it most.</p><span class="type-card-tag">Peace of mind</span></div>
-      <div class="type-card reveal delay-2"><div class="type-card-num">04</div><h3>Joint Life Insurance</h3><p>A single policy that covers two people — typically partners or spouses. Usually more cost-effective than two separate policies for couples.</p><span class="type-card-tag">For couples</span></div>
+      <div class="type-card reveal delay-1"><div class="type-card-num">01</div><h3>Term Life Insurance</h3><p>Pays out a lump sum if you die within a set period, typically 10 to 40 years. The most straightforward and affordable way to protect your family's financial future.</p><span class="type-card-tag">Most popular</span></div>
+      <div class="type-card reveal delay-2"><div class="type-card-num">02</div><h3>Whole of Life Cover</h3><p>Guaranteed to pay out whenever you die, not just within a fixed term. Ideal for estate planning and ensuring your loved ones always receive a payment.</p><span class="type-card-tag">For legacy planning</span></div>
+      <div class="type-card reveal delay-1"><div class="type-card-num">03</div><h3>Critical Illness Cover</h3><p>Pays a lump sum if you're diagnosed with a serious illness, giving you financial breathing room when you need it most.</p><span class="type-card-tag">Peace of mind</span></div>
+      <div class="type-card reveal delay-2"><div class="type-card-num">04</div><h3>Joint Life Insurance</h3><p>A single policy that covers two people, typically partners or spouses. Usually more cost-effective than two separate policies for couples.</p><span class="type-card-tag">For couples</span></div>
     </div>
   </div>
 </section>
@@ -2752,7 +2749,7 @@ footer {
       <h2 class="section-h2" style="color:var(--cream);">Getting covered is<br/><em>simpler than you think.</em></h2>
     </div>
     <div class="svc-process-steps">
-      <div class="svc-process-step reveal delay-1"><div class="svc-step-icon"><span class="svc-step-num">1</span><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div><h3>Tell Us About Your Family</h3><p>Share your situation — dependants, income, mortgage, and what you want to protect. Your adviser listens first, recommends second.</p></div>
+      <div class="svc-process-step reveal delay-1"><div class="svc-step-icon"><span class="svc-step-num">1</span><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div><h3>Tell Us About Your Family</h3><p>Share your situation, dependants, income, mortgage, and what you want to protect. Your adviser listens first, recommends second.</p></div>
       <div class="svc-process-step reveal delay-2"><div class="svc-step-icon"><span class="svc-step-num">2</span><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div><h3>We Find the Right Cover</h3><p>We search the whole market to find the best policy at the most competitive premium for your health and lifestyle.</p></div>
       <div class="svc-process-step reveal delay-3"><div class="svc-step-icon"><span class="svc-step-num">3</span><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div><h3>Your Family is Protected</h3><p>Once your policy is in place, your family is covered from day one. We review your cover regularly as your life changes.</p></div>
     </div>
@@ -2763,10 +2760,10 @@ footer {
   <div class="svc-why-layout">
     <div class="reveal"><span class="section-tag">Why Choose Us</span><h2 class="section-h2">Why families trust<br/><em>SMP</em> with their protection.</h2></div>
     <div class="svc-why-grid">
-      <div class="svc-why-card reveal delay-1"><div class="svc-why-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/></svg></div><h3>Whole of Market</h3><p>We compare policies from every insurer — not a restricted panel — so you always get the best cover at the most competitive price.</p></div>
+      <div class="svc-why-card reveal delay-1"><div class="svc-why-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/></svg></div><h3>Whole of Market</h3><p>We compare policies from every insurer, not a restricted panel, so you always get the best cover at the most competitive price.</p></div>
       <div class="svc-why-card reveal delay-2"><div class="svc-why-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><h3>FCA Regulated</h3><p>Fully authorised and regulated by the Financial Conduct Authority. Your advice and your policy are fully protected.</p></div>
-      <div class="svc-why-card reveal delay-1"><div class="svc-why-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div><h3>Completely Free</h3><p>Our life insurance advice costs you nothing. We receive commission from the insurer — always disclosed clearly before you commit.</p></div>
-      <div class="svc-why-card reveal delay-2"><div class="svc-why-icon"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div><h3>One Dedicated Adviser</h3><p>One person handles your case from start to finish. No call centres, no repeat explanations — consistent, expert advice.</p></div>
+      <div class="svc-why-card reveal delay-1"><div class="svc-why-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div><h3>Completely Free</h3><p>Our life insurance advice costs you nothing. We receive commission from the insurer, always disclosed clearly before you commit.</p></div>
+      <div class="svc-why-card reveal delay-2"><div class="svc-why-icon"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div><h3>One Dedicated Adviser</h3><p>One person handles your case from start to finish. No call centres, no repeat explanations, consistent, expert advice.</p></div>
     </div>
   </div>
 </section>
@@ -2811,7 +2808,7 @@ footer {
   <div class="svc-hero-inner">
     <p class="svc-hero-eyebrow">Income Protection · FCA Regulated</p>
     <h1>If you can't work,<br/><em>your income</em><br/>shouldn't stop.</h1>
-    <p class="svc-hero-sub">Income protection ensures your lifestyle is maintained if illness or injury stops you working — giving you the financial breathing room to focus on recovery.</p>
+    <p class="svc-hero-sub">Income protection ensures your lifestyle is maintained if illness or injury stops you working, giving you the financial breathing room to focus on recovery.</p>
     <div class="svc-hero-actions">
       <button class="btn-primary open-modal">Get Free Advice <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
       <button class="back-link" onclick="showPage('home')"><svg viewBox="0 0 24 24"><polyline points="19 12 5 12"/><polyline points="12 19 5 12 12 5"/></svg> Back to Home</button>
@@ -2832,9 +2829,9 @@ footer {
       <p class="section-intro">We find the right income protection policy based on your occupation, income, and how long you'd need cover to kick in.</p>
     </div>
     <div class="types-grid">
-      <div class="type-card reveal delay-1"><div class="type-card-num">01</div><h3>Short-Term Cover</h3><p>Pays a monthly benefit for a fixed period — typically 1 or 2 years. A cost-effective option if your employer offers some sick pay.</p><span class="type-card-tag">Budget-friendly</span></div>
-      <div class="type-card reveal delay-2"><div class="type-card-num">02</div><h3>Long-Term Cover</h3><p>Continues paying until you return to work or reach retirement age. The most comprehensive form of income protection — ideal if you have dependants or a mortgage.</p><span class="type-card-tag">Most comprehensive</span></div>
-      <div class="type-card reveal delay-1"><div class="type-card-num">03</div><h3>Self-Employed Cover</h3><p>Designed specifically for sole traders and contractors who have no employer sick pay to fall back on. Your income is your business — protect it properly.</p><span class="type-card-tag">For self-employed</span></div>
+      <div class="type-card reveal delay-1"><div class="type-card-num">01</div><h3>Short-Term Cover</h3><p>Pays a monthly benefit for a fixed period, typically 1 or 2 years. A cost-effective option if your employer offers some sick pay.</p><span class="type-card-tag">Budget-friendly</span></div>
+      <div class="type-card reveal delay-2"><div class="type-card-num">02</div><h3>Long-Term Cover</h3><p>Continues paying until you return to work or reach retirement age. The most comprehensive form of income protection, ideal if you have dependants or a mortgage.</p><span class="type-card-tag">Most comprehensive</span></div>
+      <div class="type-card reveal delay-1"><div class="type-card-num">03</div><h3>Self-Employed Cover</h3><p>Designed specifically for sole traders and contractors who have no employer sick pay to fall back on. Your income is your business, protect it properly.</p><span class="type-card-tag">For self-employed</span></div>
       <div class="type-card reveal delay-2"><div class="type-card-num">04</div><h3>Executive Income Protection</h3><p>Set up through your limited company, with premiums paid as a tax-deductible expense. Tax-efficient protection for company directors.</p><span class="type-card-tag">For directors</span></div>
     </div>
   </div>
@@ -2849,7 +2846,7 @@ footer {
     <div class="svc-process-steps">
       <div class="svc-process-step reveal delay-1"><div class="svc-step-icon"><span class="svc-step-num">1</span><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div><h3>Tell Us About Your Work</h3><p>Share your occupation, income, and employer sick pay. We'll work out exactly how much cover you need and the right deferred period.</p></div>
       <div class="svc-process-step reveal delay-2"><div class="svc-step-icon"><span class="svc-step-num">2</span><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div><h3>We Search the Market</h3><p>We compare income protection policies from every insurer to find the one that best matches your occupation, health, and budget.</p></div>
-      <div class="svc-process-step reveal delay-3"><div class="svc-step-icon"><span class="svc-step-num">3</span><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div><h3>Your Income is Covered</h3><p>If you're ever unable to work, your policy pays a monthly benefit straight to your bank account — bills, mortgage, and lifestyle all taken care of.</p></div>
+      <div class="svc-process-step reveal delay-3"><div class="svc-step-icon"><span class="svc-step-num">3</span><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div><h3>Your Income is Covered</h3><p>If you're ever unable to work, your policy pays a monthly benefit straight to your bank account, bills, mortgage, and lifestyle all taken care of.</p></div>
     </div>
   </div>
 </section>
@@ -2858,10 +2855,10 @@ footer {
   <div class="svc-why-layout">
     <div class="reveal"><span class="section-tag">Why Choose Us</span><h2 class="section-h2">Why people trust<br/><em>SMP</em> with their income.</h2></div>
     <div class="svc-why-grid">
-      <div class="svc-why-card reveal delay-1"><div class="svc-why-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/></svg></div><h3>Whole of Market</h3><p>We compare from every insurer — not a restricted panel — so you always get the best cover at the most competitive price.</p></div>
+      <div class="svc-why-card reveal delay-1"><div class="svc-why-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/></svg></div><h3>Whole of Market</h3><p>We compare from every insurer, not a restricted panel, so you always get the best cover at the most competitive price.</p></div>
       <div class="svc-why-card reveal delay-2"><div class="svc-why-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><h3>FCA Regulated</h3><p>Fully authorised and regulated by the Financial Conduct Authority. Your advice and your policy are fully protected.</p></div>
-      <div class="svc-why-card reveal delay-1"><div class="svc-why-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div><h3>Completely Free</h3><p>Our income protection advice costs you nothing. Commission from the insurer — always disclosed clearly before you commit.</p></div>
-      <div class="svc-why-card reveal delay-2"><div class="svc-why-icon"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div><h3>One Dedicated Adviser</h3><p>One person handles your case from start to finish. No call centres — consistent, expert advice throughout.</p></div>
+      <div class="svc-why-card reveal delay-1"><div class="svc-why-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div><h3>Completely Free</h3><p>Our income protection advice costs you nothing. Commission from the insurer, always disclosed clearly before you commit.</p></div>
+      <div class="svc-why-card reveal delay-2"><div class="svc-why-icon"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div><h3>One Dedicated Adviser</h3><p>One person handles your case from start to finish. No call centres, consistent, expert advice throughout.</p></div>
     </div>
   </div>
 </section>
@@ -2906,7 +2903,7 @@ footer {
   <div class="svc-hero-inner">
     <p class="svc-hero-eyebrow">Estate Planning · Wills & IHT · FCA Regulated</p>
     <h1>Protect your wealth.<br/><em>Pass it on</em><br/>your terms.</h1>
-    <p class="svc-hero-sub">Expert estate planning advice to ensure your assets pass to the right people, efficiently — minimising inheritance tax and protecting your family's future.</p>
+    <p class="svc-hero-sub">Expert estate planning advice to ensure your assets pass to the right people, efficiently, minimising inheritance tax and protecting your family's future.</p>
     <div class="svc-hero-actions">
       <button class="btn-primary open-modal">Get Free Advice <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
       <button class="back-link" onclick="showPage('home')"><svg viewBox="0 0 24 24"><polyline points="19 12 5 12"/><polyline points="12 19 5 12 12 5"/></svg> Back to Home</button>
@@ -2924,12 +2921,12 @@ footer {
     <div class="reveal">
       <span class="section-tag">What We Cover</span>
       <h2 class="section-h2">Protecting your legacy<br/>for <em>generations to come.</em></h2>
-      <p class="section-intro">From writing your will to setting up a trust or planning around inheritance tax — we make sure your estate is handled exactly as you intend.</p>
+      <p class="section-intro">From writing your will to setting up a trust or planning around inheritance tax, we make sure your estate is handled exactly as you intend.</p>
     </div>
     <div class="types-grid">
-      <div class="type-card reveal delay-1"><div class="type-card-num">01</div><h3>Wills</h3><p>A professionally written will ensures your wishes are carried out and your assets go to the right people. Without one, the law decides — not you.</p><span class="type-card-tag">Essential for everyone</span></div>
+      <div class="type-card reveal delay-1"><div class="type-card-num">01</div><h3>Wills</h3><p>A professionally written will ensures your wishes are carried out and your assets go to the right people. Without one, the law decides, not you.</p><span class="type-card-tag">Essential for everyone</span></div>
       <div class="type-card reveal delay-2"><div class="type-card-num">02</div><h3>Trusts</h3><p>Trusts allow you to ring-fence assets for your beneficiaries while protecting them from unnecessary tax, legal challenges, or mismanagement.</p><span class="type-card-tag">Asset protection</span></div>
-      <div class="type-card reveal delay-1"><div class="type-card-num">03</div><h3>Inheritance Tax Planning</h3><p>With estates over £325,000 subject to 40% IHT, strategic planning can significantly reduce your inheritance tax liability — legally and effectively.</p><span class="type-card-tag">Save up to 40%</span></div>
+      <div class="type-card reveal delay-1"><div class="type-card-num">03</div><h3>Inheritance Tax Planning</h3><p>With estates over £325,000 subject to 40% IHT, strategic planning can significantly reduce your inheritance tax liability, legally and effectively.</p><span class="type-card-tag">Save up to 40%</span></div>
       <div class="type-card reveal delay-2"><div class="type-card-num">04</div><h3>Lasting Power of Attorney</h3><p>An LPA ensures someone you trust can manage your finances and health decisions if you're ever unable to do so yourself.</p><span class="type-card-tag">Essential planning</span></div>
     </div>
   </div>
@@ -2942,8 +2939,8 @@ footer {
       <h2 class="section-h2" style="color:var(--cream);">Planning your estate<br/><em>made simple.</em></h2>
     </div>
     <div class="svc-process-steps">
-      <div class="svc-process-step reveal delay-1"><div class="svc-step-icon"><span class="svc-step-num">1</span><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div><h3>Review Your Estate</h3><p>We start by understanding the full picture — your assets, property, pensions, and wishes. This forms the foundation of your personalised plan.</p></div>
-      <div class="svc-process-step reveal delay-2"><div class="svc-step-icon"><span class="svc-step-num">2</span><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div><h3>We Build Your Plan</h3><p>From writing your will to setting up trusts and IHT strategies — we put the right structures in place to protect your estate and minimise tax.</p></div>
+      <div class="svc-process-step reveal delay-1"><div class="svc-step-icon"><span class="svc-step-num">1</span><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div><h3>Review Your Estate</h3><p>We start by understanding the full picture, your assets, property, pensions, and wishes. This forms the foundation of your personalised plan.</p></div>
+      <div class="svc-process-step reveal delay-2"><div class="svc-step-icon"><span class="svc-step-num">2</span><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div><h3>We Build Your Plan</h3><p>From writing your will to setting up trusts and IHT strategies, we put the right structures in place to protect your estate and minimise tax.</p></div>
       <div class="svc-process-step reveal delay-3"><div class="svc-step-icon"><span class="svc-step-num">3</span><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div><h3>Your Legacy is Secured</h3><p>With everything in place, your wishes are protected. We review your plan regularly as your circumstances or legislation changes.</p></div>
     </div>
   </div>
@@ -2953,10 +2950,10 @@ footer {
   <div class="svc-why-layout">
     <div class="reveal"><span class="section-tag">Why Choose Us</span><h2 class="section-h2">Why families trust<br/><em>SMP</em> with their estate.</h2></div>
     <div class="svc-why-grid">
-      <div class="svc-why-card reveal delay-1"><div class="svc-why-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/></svg></div><h3>Independent Advice</h3><p>We're not tied to any product provider. Every recommendation is made solely in your interest — no bias, no hidden agendas.</p></div>
+      <div class="svc-why-card reveal delay-1"><div class="svc-why-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/></svg></div><h3>Independent Advice</h3><p>We're not tied to any product provider. Every recommendation is made solely in your interest, no bias, no hidden agendas.</p></div>
       <div class="svc-why-card reveal delay-2"><div class="svc-why-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><h3>FCA Regulated</h3><p>Fully authorised and regulated by the Financial Conduct Authority. Your advice and your data are fully protected.</p></div>
       <div class="svc-why-card reveal delay-1"><div class="svc-why-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div><h3>Completely Free</h3><p>Our estate planning advice costs you nothing upfront. We'll always be transparent about any fees before you commit to anything.</p></div>
-      <div class="svc-why-card reveal delay-2"><div class="svc-why-icon"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div><h3>One Dedicated Adviser</h3><p>One person handles your case from start to finish. No call centres — consistent, expert advice you can trust.</p></div>
+      <div class="svc-why-card reveal delay-2"><div class="svc-why-icon"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div><h3>One Dedicated Adviser</h3><p>One person handles your case from start to finish. No call centres, consistent, expert advice you can trust.</p></div>
     </div>
   </div>
 </section>
@@ -2966,7 +2963,7 @@ footer {
     <p class="svc-review-label">Client Review</p>
     <div class="svc-review-card">
       <div class="svc-review-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
-      <p class="svc-review-quote">"Made what I thought would be a stressful process feel straightforward and manageable. Communication was excellent throughout — I always felt supported."</p>
+      <p class="svc-review-quote">"Made what I thought would be a stressful process feel straightforward and manageable. Communication was excellent throughout, I always felt supported."</p>
       <div class="svc-review-author">
         <div class="svc-review-avatar">SC</div>
         <div style="text-align:left;">
@@ -3022,7 +3019,7 @@ function pageFromHref(href) {
   return SERVICE_PAGES.includes(clean) ? clean : null;
 }
 
-// Wire up nav section links (Why SMP, FAQ) — go home first if on a service page, then scroll
+// Wire up nav section links (Why SMP, FAQ), go home first if on a service page, then scroll
 document.querySelectorAll('.nav-section-link').forEach(link => {
   link.addEventListener('click', e => {
     e.preventDefault();
@@ -3059,10 +3056,10 @@ document.querySelectorAll('[data-mobile-link]').forEach(link => {
     const sectionName = link.dataset.section;
     const svcPage = pageFromHref(href);
 
-    // Service page links — close menu and let browser navigate naturally (URL updates)
+    // Service page links, close menu and let browser navigate naturally (URL updates)
     if (svcPage) {
       closeMobileMenu();
-      return; // don't preventDefault — browser navigates to /life-insurance etc.
+      return; // don't preventDefault, browser navigates to /life-insurance etc.
     }
 
     // Everything below is in-page behavior → block default navigation
@@ -3081,7 +3078,7 @@ document.querySelectorAll('[data-mobile-link]').forEach(link => {
       return;
     }
 
-    // Section links (Why SMP, FAQ) — go home then scroll
+    // Section links (Why SMP, FAQ), go home then scroll
     if (sectionName) {
       setTimeout(() => {
         const homePage = document.getElementById('page-home');
@@ -3168,14 +3165,14 @@ function closeModal() { if(overlay){overlay.classList.remove('open'); document.b
 document.addEventListener('click', e => {
   if (e.target.closest('.open-modal')) { e.preventDefault(); openModal(); }
 });
-document.querySelectorAll('a[href="#contact"]:not(.mobile-menu-cta-btn):not(.nav-section-link), .nav-cta, .btn-cream, .btn-clients-primary').forEach(el => {
+document.querySelectorAll('a[href="#contact"]:not(.mobile-menu-cta-btn):not(.nav-section-link).nav-cta.btn-cream.btn-clients-primary').forEach(el => {
   el.addEventListener('click', e => { e.preventDefault(); openModal(); });
 });
 if(modalClose) modalClose.addEventListener('click', closeModal);
 if(overlay) overlay.addEventListener('click', e => { if (e.target === overlay) closeModal(); });
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 
-// ═══ CALLBACK FORM — AJAX submit to Netlify Forms ═══
+// ═══ CALLBACK FORM, AJAX submit to Netlify Forms ═══
 const callbackForm = document.getElementById('callbackForm');
 if (callbackForm) callbackForm.addEventListener('submit', async (e) => {
   e.preventDefault();
@@ -3202,13 +3199,13 @@ if (callbackForm) callbackForm.addEventListener('submit', async (e) => {
     document.getElementById('formSuccess').style.display = 'block';
     launchConfetti();
   } catch (err) {
-    alert('Sorry, something went wrong. Please try again — or call us directly.');
+    alert('Sorry, something went wrong. Please try again, or call us directly.');
     submitBtn.disabled = false;
     submitBtn.textContent = originalText;
   }
 });
 
-// ═══ CONFETTI — lightweight, no dependencies ═══
+// ═══ CONFETTI, lightweight, no dependencies ═══
 function launchConfetti() {
   const colors = ['#b8892a','#d4a84b','#1a3028','#2d4a3e','#f5f0e8','#ffffff'];
   for (let i = 0; i < 80; i++) {
@@ -3226,15 +3223,64 @@ function launchConfetti() {
   }
 }
 
-// ═══ AUTO-OPEN MODAL ON SERVICE LANDING PAGES ═══
+// ═══ PER-SERVICE MODAL COPY ═══
+const MODAL_COPY = {
+  'mortgages': {
+    eyebrow: 'FREE · NO OBLIGATION',
+    title: 'Find your best mortgage deal',
+    sub: "Share a few details and a whole-of-market adviser will call to review your options, from first-time buyer to remortgage to buy-to-let. Zero fees, zero pressure.",
+    button: 'Get my free mortgage review'
+  },
+  'life-insurance': {
+    eyebrow: 'FREE · NO OBLIGATION',
+    title: 'Protect your family today',
+    sub: "Tell us a little about yourself and a dedicated adviser will call you with a tailored life insurance quote, compared across 30+ UK insurers. Usually within a few hours.",
+    button: 'Get my free quote'
+  },
+  'income-protection': {
+    eyebrow: 'FREE · NO OBLIGATION',
+    title: "Protect your income if you can't work",
+    sub: "Leave your details and an adviser will call to explain exactly how income protection works, and what it would cost you based on your job, salary, and lifestyle.",
+    button: 'Get my free quote'
+  },
+  'estate-planning': {
+    eyebrow: 'FREE · NO OBLIGATION',
+    title: "Protect your family's legacy",
+    sub: "Wills, trusts, and inheritance tax planning tailored to your estate. Share your details and an estate planning specialist will call you for a free, no-obligation consultation.",
+    button: 'Book my free consultation'
+  },
+  'home': {
+    eyebrow: 'FREE · NO OBLIGATION',
+    title: 'Request a callback',
+    sub: "Leave your details and one of our advisers will call you back, usually within a few hours.",
+    button: 'Request a callback'
+  }
+};
+
+function applyModalCopyForActivePage() {
+  const activePage = document.querySelector('.page.active');
+  const slug = activePage ? activePage.id.replace('page-', '') : 'home';
+  const copy = MODAL_COPY[slug] || MODAL_COPY.home;
+  const eb = document.getElementById('modalEyebrow');
+  const t = document.getElementById('modalTitle');
+  const s = document.getElementById('modalSub');
+  const btn = document.getElementById('formSubmit');
+  if (eb) eb.textContent = copy.eyebrow;
+  if (t) t.textContent = copy.title;
+  if (s) s.textContent = copy.sub;
+  if (btn && !btn.disabled) btn.textContent = copy.button;
+}
+applyModalCopyForActivePage();
+
+// ═══ AUTO-OPEN MODAL ON SERVICE LANDING PAGES (3s delay) ═══
 (function() {
   const activePage = document.querySelector('.page.active');
-  if (!activePage || activePage.id === 'page-home') return; // only on service pages
-  if (sessionStorage.getItem('modalAutoOpened')) return; // only once per session
+  if (!activePage || activePage.id === 'page-home') return;
+  if (sessionStorage.getItem('modalAutoOpened')) return;
   setTimeout(() => {
     openModal();
     sessionStorage.setItem('modalAutoOpened', '1');
-  }, 2000);
+  }, 3000);
 })();
 
 // ═══ REVEAL ON SCROLL ═══
