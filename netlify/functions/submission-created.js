@@ -15,9 +15,18 @@ export const handler = async (event) => {
     const age = (data.age || '—').toString().trim();
     const service = (data.service || 'home').toString().trim();
 
-    const accountSid = process.env.TWILIO_ACCOUNT_SID;
-    const authToken = process.env.TWILIO_AUTH_TOKEN;
-    const fromNumber = process.env.TWILIO_WHATSAPP_FROM;
+    const accountSid = (process.env.TWILIO_ACCOUNT_SID || '').trim();
+    const authToken = (process.env.TWILIO_AUTH_TOKEN || '').trim();
+    const fromNumber = (process.env.TWILIO_WHATSAPP_FROM || '').trim();
+
+    console.log('DEBUG env:', {
+      sidPrefix: accountSid.slice(0, 4),
+      sidLen: accountSid.length,
+      tokenLen: authToken.length,
+      fromRaw: JSON.stringify(fromNumber),
+      fromLen: fromNumber.length,
+      toRaw: JSON.stringify(NOTIFY_WHATSAPP)
+    });
 
     if (!accountSid || !authToken || !fromNumber) {
       console.error('Missing Twilio env vars — skipping WhatsApp notification');
