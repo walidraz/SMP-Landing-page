@@ -3032,20 +3032,14 @@ function showPage(pageId) {
   }
 }
 
-// Wire up dropdown links (Services → service pages)
-// Handles both "page.html" and "/page" URL formats (Netlify pretty URLs)
+// Dropdown links let the browser navigate naturally so the URL updates
+// (e.g. /life-insurance). Each service has its own HTML file.
 const SERVICE_PAGES = ['mortgages','life-insurance','income-protection','estate-planning'];
 function pageFromHref(href) {
   if (!href) return null;
   const clean = href.replace(/^\//,'').replace(/\.html$/,'').split(/[?#]/)[0];
   return SERVICE_PAGES.includes(clean) ? clean : null;
 }
-document.querySelectorAll('.dropdown-item').forEach(item => {
-  item.addEventListener('click', e => {
-    const page = pageFromHref(item.getAttribute('href'));
-    if (page) { e.preventDefault(); showPage(page); }
-  });
-});
 
 // Wire up nav section links (Why SMP, FAQ) — go home first if on a service page, then scroll
 document.querySelectorAll('.nav-section-link').forEach(link => {
@@ -3079,12 +3073,20 @@ if(mobileMenuClose) mobileMenuClose.addEventListener('click', closeMobileMenu);
 // Mobile menu link routing
 document.querySelectorAll('[data-mobile-link]').forEach(link => {
   link.addEventListener('click', e => {
-    e.preventDefault();
-    closeMobileMenu();
-
     const href = link.getAttribute('href');
     const pageName = link.dataset.page;
     const sectionName = link.dataset.section;
+    const svcPage = pageFromHref(href);
+
+    // Service page links — close menu and let browser navigate naturally (URL updates)
+    if (svcPage) {
+      closeMobileMenu();
+      return; // don't preventDefault — browser navigates to /life-insurance etc.
+    }
+
+    // Everything below is in-page behavior → block default navigation
+    e.preventDefault();
+    closeMobileMenu();
 
     // Home link
     if (pageName === 'home') {
@@ -3113,13 +3115,6 @@ document.querySelectorAll('[data-mobile-link]').forEach(link => {
           if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
       }, 300);
-      return;
-    }
-
-    // Service page links (handles both "page.html" and "/page" formats)
-    const svcPage = pageFromHref(href);
-    if (svcPage) {
-      setTimeout(() => showPage(svcPage), 300);
       return;
     }
   });
@@ -3215,18 +3210,18 @@ const revealObserver = new IntersectionObserver((entries) => {
 }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
 document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 
-// ═══ SERVICE ACCORDION + ROUTING ═══
+// ═══ SERVICE ITEMS → navigate to real service URLs ═══
 document.querySelectorAll('.service-item').forEach(item => {
   item.style.cursor = 'pointer';
   item.addEventListener('click', () => {
-    document.querySelectorAll('.service-item').forEach(i => i.classList.remove('active'));
-    item.classList.add('active');
     const heading = (item.querySelector('h3')?.textContent || '').trim().toLowerCase();
-    if (heading.includes('mortgage')) showPage('mortgages');
-    else if (heading.includes('life insurance')) showPage('life-insurance');
-    else if (heading.includes('critical illness')) showPage('life-insurance');
-    else if (heading.includes('income protection')) showPage('income-protection');
-    else if (heading.includes('estate planning')) showPage('estate-planning');
+    let page = null;
+    if (heading.includes('mortgage')) page = 'mortgages';
+    else if (heading.includes('life insurance')) page = 'life-insurance';
+    else if (heading.includes('critical illness')) page = 'life-insurance';
+    else if (heading.includes('income protection')) page = 'income-protection';
+    else if (heading.includes('estate planning')) page = 'estate-planning';
+    if (page) window.location.href = '/' + page;
   });
 });
 
