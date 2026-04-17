@@ -94,7 +94,7 @@ body::before {
 /* ─── NAVIGATION ─── */
 header {
   position: fixed;
-  top: 36px; left: 0; right: 0;
+  top: 0; left: 0; right: 0;
   z-index: 1000;
   padding: 28px 60px;
   display: flex;
@@ -1298,7 +1298,7 @@ footer {
 
 /* ─── RESPONSIVE ─── */
 @media (max-width: 1024px) {
-  header { padding: 24px 32px; top: 36px; }
+  header { padding: 24px 32px; top: 0; }
   header.scrolled { padding: 16px 32px; top: 0; }
   nav { display: none; }
   .hamburger { display: flex; }
@@ -1389,7 +1389,7 @@ footer {
   .clients-h2 { font-size: 32px; }
 
   /* ── HEADER ── */
-  header { padding: 16px 20px; top: 36px; }
+  header { padding: 16px 20px; top: 0; }
   header.scrolled { padding: 14px 20px; top: 0; }
   .logo { font-size: 16px; }
   .logo span.logo-text-hide { display: none; }
