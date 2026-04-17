@@ -3033,14 +3033,17 @@ function showPage(pageId) {
 }
 
 // Wire up dropdown links (Services → service pages)
+// Handles both "page.html" and "/page" URL formats (Netlify pretty URLs)
+const SERVICE_PAGES = ['mortgages','life-insurance','income-protection','estate-planning'];
+function pageFromHref(href) {
+  if (!href) return null;
+  const clean = href.replace(/^\//,'').replace(/\.html$/,'').split(/[?#]/)[0];
+  return SERVICE_PAGES.includes(clean) ? clean : null;
+}
 document.querySelectorAll('.dropdown-item').forEach(item => {
   item.addEventListener('click', e => {
-    e.preventDefault();
-    const href = item.getAttribute('href');
-    if (href === 'mortgages.html') showPage('mortgages');
-    else if (href === 'life-insurance.html') showPage('life-insurance');
-    else if (href === 'income-protection.html') showPage('income-protection');
-    else if (href === 'estate-planning.html') showPage('estate-planning');
+    const page = pageFromHref(item.getAttribute('href'));
+    if (page) { e.preventDefault(); showPage(page); }
   });
 });
 
@@ -3113,10 +3116,10 @@ document.querySelectorAll('[data-mobile-link]').forEach(link => {
       return;
     }
 
-    // Service page links (.html)
-    if (href && href.endsWith('.html')) {
-      const page = href.replace('.html','');
-      setTimeout(() => showPage(page), 300);
+    // Service page links (handles both "page.html" and "/page" formats)
+    const svcPage = pageFromHref(href);
+    if (svcPage) {
+      setTimeout(() => showPage(svcPage), 300);
       return;
     }
   });
