@@ -72,6 +72,10 @@ async function sendToMetaCAPI({ name, email, phone, age, service, qualifier, use
     }]
   };
 
+  // If META_TEST_EVENT_CODE env var is set, route events to Meta's Test Events tab for verification
+  const testCode = (process.env.META_TEST_EVENT_CODE || '').trim();
+  if (testCode) payload.test_event_code = testCode;
+
   const url = `https://graph.facebook.com/v18.0/${pixelId}/events?access_token=${encodeURIComponent(token)}`;
 
   try {
