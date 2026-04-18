@@ -1989,6 +1989,12 @@ footer {
           <label class="form-label" for="f-age">Your Age</label>
           <input class="form-input" type="number" name="age" id="f-age" required min="18" max="100" placeholder="e.g. 35"/>
         </div>
+        <div class="form-group" id="qualifier-group" style="display:none;">
+          <label class="form-label" for="f-qualifier" id="qualifier-label">Tell us more</label>
+          <select class="form-input" name="qualifier" id="f-qualifier">
+            <option value="">Select an option</option>
+          </select>
+        </div>
         <button type="submit" class="btn-submit" id="formSubmit">Request a Callback</button>
         <p class="form-note">By submitting you agree to our <a href="/privacy-policy" target="_blank" style="color:var(--gold);text-decoration:underline;">Privacy Policy</a>. We'll never share your details.</p>
       </div>
@@ -3276,37 +3282,46 @@ function launchConfetti() {
   }
 }
 
-// ═══ PER-SERVICE MODAL COPY ═══
+// ═══ PER-SERVICE MODAL COPY + QUALIFIER QUESTION ═══
 const MODAL_COPY = {
   'mortgages': {
     eyebrow: 'FREE · NO OBLIGATION',
     title: 'Find your best mortgage deal',
     sub: "Share a few details and a whole-of-market adviser will call to review your options, from first-time buyer to remortgage to buy-to-let. Zero fees, zero pressure.",
-    button: 'Get my free mortgage review'
+    button: 'Get my free mortgage review',
+    qualifierLabel: 'Your situation',
+    qualifierOptions: ['First-time buyer', 'Remortgage', 'Buy-to-let', 'Moving home']
   },
   'life-insurance': {
     eyebrow: 'FREE · NO OBLIGATION',
     title: 'Protect your family today',
     sub: "Tell us a little about yourself and a dedicated adviser will call you with a tailored life insurance quote, compared across 30+ UK insurers. Usually within a few hours.",
-    button: 'Get my free quote'
+    button: 'Get my free quote',
+    qualifierLabel: 'Cover amount you are considering',
+    qualifierOptions: ['Under £100k', '£100k – £250k', '£250k – £500k', '£500k+', 'Not sure']
   },
   'income-protection': {
     eyebrow: 'FREE · NO OBLIGATION',
     title: "Protect your income if you can't work",
     sub: "Leave your details and an adviser will call to explain exactly how income protection works, and what it would cost you based on your job, salary, and lifestyle.",
-    button: 'Get my free quote'
+    button: 'Get my free quote',
+    qualifierLabel: 'Annual income range',
+    qualifierOptions: ['Under £30k', '£30k – £60k', '£60k – £100k', '£100k+']
   },
   'estate-planning': {
     eyebrow: 'FREE · NO OBLIGATION',
     title: "Protect your family's legacy",
     sub: "Wills, trusts, and inheritance tax planning tailored to your estate. Share your details and an estate planning specialist will call you for a free, no-obligation consultation.",
-    button: 'Book my free consultation'
+    button: 'Book my free consultation',
+    qualifierLabel: 'Estate value range',
+    qualifierOptions: ['Under £325k', '£325k – £650k', '£650k – £1m', '£1m+']
   },
   'home': {
     eyebrow: 'FREE · NO OBLIGATION',
     title: 'Request a callback',
     sub: "Leave your details and one of our advisers will call you back, usually within a few hours.",
     button: 'Request a callback'
+    // no qualifier on home
   }
 };
 
@@ -3322,6 +3337,24 @@ function applyModalCopyForActivePage() {
   if (t) t.textContent = copy.title;
   if (s) s.textContent = copy.sub;
   if (btn && !btn.disabled) btn.textContent = copy.button;
+
+  // Show service-specific qualifier dropdown
+  const qGroup = document.getElementById('qualifier-group');
+  const qLabel = document.getElementById('qualifier-label');
+  const qSelect = document.getElementById('f-qualifier');
+  if (qGroup && qLabel && qSelect) {
+    if (copy.qualifierOptions && copy.qualifierOptions.length) {
+      qLabel.textContent = copy.qualifierLabel;
+      qSelect.innerHTML = '<option value="">Select an option</option>' +
+        copy.qualifierOptions.map(o => `<option value="${o}">${o}</option>`).join('');
+      qSelect.required = true;
+      qGroup.style.display = 'block';
+    } else {
+      qGroup.style.display = 'none';
+      qSelect.required = false;
+      qSelect.value = '';
+    }
+  }
 }
 applyModalCopyForActivePage();
 

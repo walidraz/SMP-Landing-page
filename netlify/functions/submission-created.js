@@ -10,10 +10,11 @@ export const handler = async (event) => {
     const data = payload.data || {};
 
     const name = (data.name || 'Unknown').toString().trim();
-    const email = (data.email || '—').toString().trim();
-    const phone = (data.phone || '—').toString().trim();
-    const age = (data.age || '—').toString().trim();
+    const email = (data.email || '-').toString().trim();
+    const phone = (data.phone || '-').toString().trim();
+    const age = (data.age || '-').toString().trim();
     const service = (data.service || 'home').toString().trim();
+    const qualifier = (data.qualifier || '').toString().trim();
 
     const accountSid = (process.env.TWILIO_ACCOUNT_SID || '').trim();
     const authToken = (process.env.TWILIO_AUTH_TOKEN || '').trim();
@@ -33,6 +34,7 @@ export const handler = async (event) => {
       return { statusCode: 200, body: 'skipped (missing config)' };
     }
 
+    const qualifierLine = qualifier ? `\nDetails: ${qualifier}` : '';
     const message =
 `🔔 New SMP Lead
 
@@ -40,7 +42,7 @@ Name: ${name}
 Phone: ${phone}
 Email: ${email}
 Age: ${age}
-Service: ${service}
+Service: ${service}${qualifierLine}
 
 📝 Contact ASAP`;
 
