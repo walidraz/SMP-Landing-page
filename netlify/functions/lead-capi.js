@@ -27,6 +27,17 @@ export const handler = async (event) => {
       return { statusCode: 200, body: 'skipped' };
     }
 
+    // ─── Safety guard: skip CAPI for obvious test traffic ───
+    // Prevents curl / bot tests from contaminating production Meta data.
+    const incomingUA = (data.user_agent || event.headers['user-agent'] || '').toLowerCase();
+    const skipUserAgents = ['curl', 'wget', 'postman', 'insomnia', 'testbot', 'python-requests', 'node-fetch'];
+    const testEmail = (data.email || '').toLowerCase();
+    const isTestEmail = /^(test|debug|fresh|trace|isolated|qa|demo)/i.test(testEmail) || testEmail.includes('@example.com') || testEmail.includes('@ex.com') || testEmail === 'd@e.com';
+    if (skipUserAgents.some(ua => incomingUA.includes(ua)) || isTestEmail) {
+      console.log('CAPI: skipped test traffic', { ua: incomingUA.slice(0, 40), email: testEmail });
+      return { statusCode: 200, body: 'skipped (test traffic)' };
+    }
+
     const name = (data.name || '').toString().trim();
     const email = (data.email || '').toString().trim();
     const phone = (data.phone || '').toString().trim();
